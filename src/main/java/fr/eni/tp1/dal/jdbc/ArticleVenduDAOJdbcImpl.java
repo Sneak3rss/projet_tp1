@@ -50,15 +50,14 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pStmt.setDate(4,Date.valueOf(article.getDateFinencheres()));
 			pStmt.setDouble(5, article.getMiseAPrix());
 			pStmt.setDouble(6, article.getPrixVente());
-			pStmt.setString(6, article.get);
-
+			pStmt.setString(7, String.valueOf(article.getEtatVente()));
 			pStmt.executeUpdate();
 			
 
 		}
 		catch (Exception e) {
 			
-			
+			e.printStackTrace();
 		}
 
 
