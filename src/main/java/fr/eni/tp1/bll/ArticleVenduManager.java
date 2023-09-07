@@ -3,7 +3,7 @@ package fr.eni.tp1.bll;
 import java.util.List;
 
 import fr.eni.tp1.bo.ArticleVendu;
-import fr.eni.tp1.dal.dao.ArticleVenduDAOFactory;
+import fr.eni.tp1.dal.dao.DAOFactory;
 
 public class ArticleVenduManager {
 	
@@ -20,22 +20,22 @@ public class ArticleVenduManager {
 	private ArticleVenduManager() { }
 
 	public List<ArticleVendu> selectAll() {
-		return ArticleVenduDAOFactory.getDAOArticleVendu().selectAll();
+		return DAOFactory.getDAOArticleVendu().selectAll();
 	}
 	
 	public void insert(ArticleVendu articleVendu) {
-        ArticleVenduDAOFactory.getDAOArticleVendu().insert(articleVendu);
+		DAOFactory.getDAOArticleVendu().insert(articleVendu);
     }
 
     public void delete(int noarticle) {
-        ArticleVenduDAOFactory.getDAOArticleVendu().delete(noarticle);
+    	DAOFactory.getDAOArticleVendu().delete(noarticle);
     }
 
     public void update(ArticleVendu articleVendu) {
-        ArticleVenduDAOFactory.getDAOArticleVendu().update(articleVendu);
+    	DAOFactory.getDAOArticleVendu().update(articleVendu);
     }
 
     public ArticleVendu selectById(int noarticle) {
-        return ArticleVenduDAOFactory.getDAOArticleVendu().selectById(noarticle);
+        return DAOFactory.getDAOArticleVendu().selectById(noarticle);
     }
 }

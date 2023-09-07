@@ -17,21 +17,20 @@ public class Utilisateur {
      private String ville;
      private String motDePasse;
      private int credit;
-     @Override
-	public String toString() {
-		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
-				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + ", enchere=" + enchere + ", articlesVendus=" + articlesVendus
-				+ "]";
-	}
-
+ 
 	private String administrateur;
      
      private Enchere enchere;
      private List<ArticleVendu> articlesVendus = new ArrayList<>();
-     
-     
+     @Override
+ 	public String toString() {
+ 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+ 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+ 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+ 				+ ", administrateur=" + administrateur + ", enchere=" + enchere + ", articlesVendus=" + articlesVendus
+ 				+ "]";
+ 	}
+
      // CONSTRUCTEURS
      public Utilisateur() {
          super();
@@ -80,7 +79,23 @@ public class Utilisateur {
          this.articlesVendus= articlesVendus;
 
      }
-     
+     public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
+             String rue, String codePostal, String ville, String motDePasse, int credit
+           ) {
+    	 
+         super();
+         this.pseudo = pseudo;
+         this.nom = nom;
+         this.prenom = prenom;
+         this.email = email;
+         this.telephone = telephone;
+         this.rue = rue;
+         this.codePostal = codePostal;
+         this.ville = ville;
+         this.motDePasse = motDePasse;
+         this.credit = credit;
+      
+     }
      // METHODES
      public void addArticleVendu(ArticleVendu articleVendu ) {
          articlesVendus.add(articleVendu);

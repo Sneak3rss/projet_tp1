@@ -1,7 +1,8 @@
 package fr.eni.tp1.bll;
 
+
 import fr.eni.tp1.bo.Utilisateur;
-import fr.eni.tp1.dal.dao.UtilisateurDAOFactory;
+import fr.eni.tp1.dal.dao.DAOFactory;
 
 public class UtilisateurManager {
 	
@@ -18,6 +19,11 @@ public class UtilisateurManager {
 	
 	public Utilisateur getUtilisateur( String pseudo, String pssword) {
 	
-		return UtilisateurDAOFactory.getDaoUtilisateur().selectByIDUtilisateur(pseudo, pssword);
+		return DAOFactory.getDaoUtilisateur().selectByIDUtilisateur(pseudo, pssword);
+	}
+	
+	public void insertUtilisateur( Utilisateur utilisateur) {
+		
+		DAOFactory.getDaoUtilisateur().insert(utilisateur);
 	}
 }
