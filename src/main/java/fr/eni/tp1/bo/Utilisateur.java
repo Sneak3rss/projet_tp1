@@ -17,7 +17,16 @@ public class Utilisateur {
      private String ville;
      private String motDePasse;
      private double credit;
-     private String administrateur;
+     @Override
+	public String toString() {
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + ", enchere=" + enchere + ", articlesVendus=" + articlesVendus
+				+ "]";
+	}
+
+	private String administrateur;
      
      private Enchere enchere;
      private List<ArticleVendu> articlesVendus = new ArrayList<>();

@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.bo.Categorie;
+import fr.eni.tp1.bo.Retrait;
 import fr.eni.tp1.bo.Utilisateur;
 import fr.eni.tp1.dal.dao.ConnectionProvider;
 import fr.eni.tp1.dal.dao.DAOArticleVendu;
@@ -26,11 +27,14 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
             """;
     
     private final static String INSERT_ARTICLES_VENDUS = """
-            INSERT INTO Articles_vendus(nom_article, description, date_debut_encheres, 
+            INSERT INTO Articles_vendus(no_article, rue, code_postal, 
             date_fin_encheres,prix_initial, prix_vente,etat_vente)
             VALUES (?,?,?,?,?,?,?);
             """;
-    
+    private final static String INSERT_RETRAIT = """
+            INSERT INTO RETRAITS(no_article, rue, code_postal, ville)
+            VALUES (?,?,?,?);
+            """;
     
     @Override
     public List<ArticleVendu> selectAll() {
@@ -77,6 +81,19 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pStmt.setDouble(5, article.getMiseAPrix());
 			pStmt.setDouble(6, article.getPrixVente());
 			pStmt.setString(7, String.valueOf(article.getEtatVente()));
+			
+			ResultSet rsCleGenere = pStmt.getGeneratedKeys();
+			if (rsCleGenere.next()) {
+				rsCleGenere.getInt(1);
+			}
+			PreparedStatement pSmtRetrait = cnx.prepareStatement(INSERT_RETRAIT);
+			
+			pSmtRetrait.setInt(1,rsCleGenere.getInt(1));
+			pSmtRetrait.setString(2,article.getRetrait().getRue());
+			pSmtRetrait.setString(3,article.getRetrait().getCodePostal());
+			pSmtRetrait.setString(4,article.getRetrait().getVille());
+
+			pSmtRetrait.executeUpdate();
 			pStmt.executeUpdate();
 			
 
