@@ -1,21 +1,23 @@
 package fr.eni.tp1.dal.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 import fr.eni.tp1.bo.ArticleVendu;
+import fr.eni.tp1.dal.dao.ConnectionProvider;
 import fr.eni.tp1.dal.dao.DAOArticleVendu;
 
 public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
     
     private final static String SELECT_ALL = """
-            SELECT *
+          	SELECT *
             FROM Articles_vendus
-            INNER JOIN Encheres ON no_enchere=enchere
-            ORDER BY no_enchere;
-            INNER JOIN Categories ON no_categorie=categorie
-            ORDER BY no_categorie;
-            INNER JOIN Retraits ON no_article=article
-            ORDER BY no_article;
+            INNER JOIN ENCHERES ON ARTICLES_VENDUS.no_article=ENCHERES.no_article
+            INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie
+            INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article
+            ORDER BY ARTICLES_VENDUS.no_article;
             """;
     
     private final static String INSERT_ARTICLES_VENDUS = """
@@ -35,13 +37,33 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 
     @Override
     public void insert(ArticleVendu articleVenduBo) {
-        // TODO Auto-generated method stub
-        
+    	
+    	
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, Statement.RETURN_GENERATED_KEYS);
+
+		}
+		catch (Exception e) {
+			
+			
+		}
+
+
+      
     }
 
     @Override
     public void delete(int noarticle) {
-        // TODO Auto-generated method stub
         
     }
+
+	@Override
+	public ArticleVendu selectById(int noarticle) {
+		return null;
+	}
+
+	@Override
+	public void update(ArticleVendu articleVendu) {
+		
+	}
 }

@@ -26,13 +26,12 @@ public class Utilisateur {
      // CONSTRUCTEURS
      public Utilisateur() {
          super();
-         // TODO Auto-generated constructor stub
      }
 
 
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
              String rue, int codePostal, String ville, String motDePasse, double credit, String administrateur,
-             Enchere enchere, List<ArticleVendu> articlesVendus) {
+            Enchere enchere, List<ArticleVendu> articlesVendus) {
          super();
          this.noUtilisateur = noUtilisateur;
          this.pseudo = pseudo;
@@ -46,14 +45,16 @@ public class Utilisateur {
          this.motDePasse = motDePasse;
          this.credit = credit;
          this.administrateur = administrateur;
-         this.enchere = enchere;
-         this.articlesVendus = articlesVendus;
+         this.enchere= enchere;
+         this.articlesVendus= articlesVendus;
+         
      }
 
 
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
              String rue, int codePostal, String ville, String motDePasse, double credit, String administrateur,
              List<ArticleVendu> articlesVendus) {
+    	 
          super();
          this.noUtilisateur = noUtilisateur;
          this.pseudo = pseudo;
@@ -67,7 +68,8 @@ public class Utilisateur {
          this.motDePasse = motDePasse;
          this.credit = credit;
          this.administrateur = administrateur;
-         this.articlesVendus = articlesVendus;
+         this.articlesVendus= articlesVendus;
+
      }
      
      // METHODES
