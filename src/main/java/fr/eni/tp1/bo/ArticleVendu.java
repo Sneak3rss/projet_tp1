@@ -14,7 +14,7 @@ public class ArticleVendu {
     private LocalDate dateFinencheres;
     private double miseAPrix;
     private double prixVente;
-    private char etatVente;
+    private String etatVente;
    
     private Utilisateur utilisateur;
     private List<Enchere> encheres = new ArrayList<>();
@@ -27,16 +27,16 @@ public class ArticleVendu {
         
     }
 
-    public char getEtatVente() {
+    public String getEtatVente() {
 		return etatVente;
 	}
 
-	public void setEtatVente(char etatVente) {
+	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
 
 	public ArticleVendu(int noarticle, String nomArticle, String descrition, LocalDate dateDebutencheres,
-            LocalDate dateFinencheres, double miseAPrix, double prixVente, char etatVente, Utilisateur utilisateur,
+            LocalDate dateFinencheres, double miseAPrix, double prixVente, String etatVente, Utilisateur utilisateur,
             List<Enchere> encheres, Categorie categorie, Retrait retrait) {
         super();
         this.noarticle = noarticle;
@@ -54,7 +54,7 @@ public class ArticleVendu {
     }
     
     public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
-            LocalDate dateFinencheres, double miseAPrix, double prixVente, char etatVente) {
+            LocalDate dateFinencheres, double miseAPrix, double prixVente, String etatVente) {
         super();
         this.nomArticle = nomArticle;
         this.descrition = descrition;

@@ -6,6 +6,8 @@ import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.dal.dao.ArticleVenduDAOFactory;
 
 public class ArticleVenduManager {
+	
+	
 	private static ArticleVenduManager instance;
 	
 	public static ArticleVenduManager getInstance() {

@@ -3,7 +3,7 @@ package fr.eni.tp1.bo;
 import java.time.LocalDate;
 
 public class Enchere {
-	 private int noUtilisateur;
+	 	private int noUtilisateur;
 	    private int noArticle;
 	    private LocalDate dateEnchere;
 	    private int montantEnchere;

@@ -15,7 +15,11 @@ public class Categorie {
 	        this.libelle = libelle;
 	    }
 
-	    // GETTERS ET SETTERS
+	    public Categorie(String libelle2) {
+			// TODO Auto-generated constructor stub
+		}
+
+		// GETTERS ET SETTERS
 	    public int getNoCategorie() {
 	        return noCategorie;
 	    }
