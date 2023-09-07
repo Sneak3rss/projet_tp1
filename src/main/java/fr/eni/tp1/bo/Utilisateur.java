@@ -13,10 +13,10 @@ public class Utilisateur {
      private String email;
      private String telephone;
      private String rue;
-     private int codePostal;
+     private String codePostal;
      private String ville;
      private String motDePasse;
-     private double credit;
+     private int credit;
      @Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
@@ -39,7 +39,7 @@ public class Utilisateur {
 
 
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-             String rue, int codePostal, String ville, String motDePasse, double credit, String administrateur,
+             String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur,
             Enchere enchere, List<ArticleVendu> articlesVendus) {
          super();
          this.noUtilisateur = noUtilisateur;
@@ -61,7 +61,7 @@ public class Utilisateur {
 
 
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-             String rue, int codePostal, String ville, String motDePasse, double credit, String administrateur,
+             String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur,
              List<ArticleVendu> articlesVendus) {
     	 
          super();
@@ -145,11 +145,11 @@ public class Utilisateur {
          this.rue = rue;
      }
 
-     public int getCodePostal() {
+     public String getCodePostal() {
          return codePostal;
      }
 
-     public void setCodePostal(int codePostal) {
+     public void setCodePostal(String codePostal) {
          this.codePostal = codePostal;
      }
 
@@ -169,11 +169,11 @@ public class Utilisateur {
          this.motDePasse = motDePasse;
      }
 
-     public double getCredit() {
+     public int getCredit() {
          return credit;
      }
 
-     public void setCredit(double credit) {
+     public void setCredit(int credit) {
          this.credit = credit;
      }
 
