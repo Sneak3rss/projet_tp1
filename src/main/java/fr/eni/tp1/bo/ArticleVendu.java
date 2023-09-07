@@ -14,8 +14,8 @@ public class ArticleVendu {
     private LocalDate dateFinencheres;
     private double miseAPrix;
     private double prixVente;
-    private boolean etatVente;
-    
+    private char etatVente;
+   
     private Utilisateur utilisateur;
     private List<Enchere> encheres = new ArrayList<>();
     private Categorie categorie;
@@ -27,8 +27,16 @@ public class ArticleVendu {
         
     }
 
-    public ArticleVendu(int noarticle, String nomArticle, String descrition, LocalDate dateDebutencheres,
-            LocalDate dateFinencheres, double miseAPrix, double prixVente, boolean etatVente, Utilisateur utilisateur,
+    public char getEtatVente() {
+		return etatVente;
+	}
+
+	public void setEtatVente(char etatVente) {
+		this.etatVente = etatVente;
+	}
+
+	public ArticleVendu(int noarticle, String nomArticle, String descrition, LocalDate dateDebutencheres,
+            LocalDate dateFinencheres, double miseAPrix, double prixVente, char etatVente, Utilisateur utilisateur,
             List<Enchere> encheres, Categorie categorie, Retrait retrait) {
         super();
         this.noarticle = noarticle;
@@ -46,7 +54,7 @@ public class ArticleVendu {
     }
     
     public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
-            LocalDate dateFinencheres, double miseAPrix, double prixVente, boolean etatVente) {
+            LocalDate dateFinencheres, double miseAPrix, double prixVente, char etatVente) {
         super();
         this.nomArticle = nomArticle;
         this.descrition = descrition;
@@ -57,6 +65,7 @@ public class ArticleVendu {
         this.etatVente = etatVente;
     }
 
+    
     // METHODE
     public void addEnchere(Enchere enchere ) {
         encheres.add(enchere);
@@ -109,12 +118,7 @@ public class ArticleVendu {
     public void setPrixVente(double prixVente) {
         this.prixVente = prixVente;
     }
-    public boolean isEtatVente() {
-        return etatVente;
-    }
-    public void setEtatVente(boolean etatVente) {
-        this.etatVente = etatVente;
-    }
+
     
     public List<Enchere> getEncheres() {
  		return encheres;

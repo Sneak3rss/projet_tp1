@@ -1,8 +1,10 @@
 package fr.eni.tp1.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.tp1.bo.ArticleVendu;
@@ -21,8 +23,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
             """;
     
     private final static String INSERT_ARTICLES_VENDUS = """
-            INSERT INTO Articles_vendus(nomArticle, description, dateDebutEncheres, 
-            dateFinEncheres,miseAPrix, prixVente, etatVente)
+            INSERT INTO Articles_vendus(nom_article, description, date_debut_encheres, 
+            date_fin_encheres,prix_initial, prix_vente)
             VALUES (?,?,?,?,?,?,?);
             """;
     
@@ -36,11 +38,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
     }
 
     @Override
-    public void insert(ArticleVendu articleVenduBo) {
+    public void insert(ArticleVendu article) {
     	
     	
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, Statement.RETURN_GENERATED_KEYS);
+			LocalDate date= article.getDateDebutencheres();
+			pStmt.setString(1,article.getNomArticle());
+			pStmt.setString(2, article.getDescrition());
+			pStmt.setDate(3,Date.valueOf(article.getDateDebutencheres()));
+			pStmt.setDate(4,Date.valueOf(article.getDateFinencheres()));
+			pStmt.setDouble(5, article.getMiseAPrix());
+			pStmt.setDouble(6, article.getPrixVente());
+			pStmt.setString(6, article.get);
+
+			pStmt.executeUpdate();
+			
 
 		}
 		catch (Exception e) {
