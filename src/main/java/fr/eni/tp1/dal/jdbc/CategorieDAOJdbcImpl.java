@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.dal.dao.DAOCategorie;
 
-public class CategorueDAOJdbcImpl  implements DAOCategorie{
+public class CategorieDAOJdbcImpl  implements DAOCategorie{
 
 	@Override
 	public List<ArticleVendu> selectAll() {
