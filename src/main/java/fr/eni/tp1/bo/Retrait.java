@@ -10,8 +10,14 @@ public class Retrait {
 
     }
 
-    public Retrait(int noArticle, String rue, String codePostal, String ville) {
+ 
+	public Retrait(int noArticle, String rue, String codePostal, String ville) {
         this.noArticle = noArticle;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+    }
+    public Retrait( String rue, String codePostal, String ville) {
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
@@ -48,5 +54,10 @@ public class Retrait {
     public void setVille(String ville) {
         this.ville = ville;
     }
+    @Override
+ 	public String toString() {
+ 		return "Retrait [noArticle=" + noArticle + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville
+ 				+ "]";
+ 	}
 
 }

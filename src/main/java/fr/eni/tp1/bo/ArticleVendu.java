@@ -17,7 +17,9 @@ public class ArticleVendu {
     private String etatVente;
    
     private Utilisateur utilisateur;
-    private List<Enchere> encheres = new ArrayList<>();
+   
+	
+	private List<Enchere> encheres = new ArrayList<>();
     private Categorie categorie;
     private Retrait retrait;
     
@@ -53,6 +55,21 @@ public class ArticleVendu {
         this.retrait = retrait;
     }
     
+    public ArticleVendu(int noarticle, String nomArticle, String descrition, LocalDate dateDebutencheres,
+            LocalDate dateFinencheres, double miseAPrix, double prixVente, String etatVente) {
+        super();
+        this.noarticle = noarticle;
+
+        this.nomArticle = nomArticle;
+        this.descrition = descrition;
+        this.dateDebutencheres = dateDebutencheres;
+        this.dateFinencheres = dateFinencheres;
+        this.miseAPrix = miseAPrix;
+        this.prixVente = prixVente;
+        this.etatVente = etatVente;
+        this.categorie = new Categorie();
+        this.retrait = new Retrait();
+    }
     public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
             LocalDate dateFinencheres, double miseAPrix, double prixVente, String etatVente) {
         super();
@@ -63,8 +80,22 @@ public class ArticleVendu {
         this.miseAPrix = miseAPrix;
         this.prixVente = prixVente;
         this.etatVente = etatVente;
+        this.categorie = new Categorie();
+        this.retrait = new Retrait();
     }
 
+    public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
+            LocalDate dateFinencheres, double miseAPrix, String etatVente) {
+        super();
+        this.nomArticle = nomArticle;
+        this.descrition = descrition;
+        this.dateDebutencheres = dateDebutencheres;
+        this.dateFinencheres = dateFinencheres;
+        this.miseAPrix = miseAPrix;
+        this.etatVente = etatVente;
+        this.categorie = new Categorie();
+        this.retrait = new Retrait();
+    }
     
     // METHODE
     public void addEnchere(Enchere enchere ) {
@@ -146,4 +177,11 @@ public class ArticleVendu {
     public void setRetrait(Retrait retrait) {
         this.retrait = retrait;
     }
+    @Override
+    public String toString() {
+		return "ArticleVendu [noarticle=" + noarticle + ", nomArticle=" + nomArticle + ", descrition=" + descrition
+				+ ", dateDebutencheres=" + dateDebutencheres + ", dateFinencheres=" + dateFinencheres + ", miseAPrix="
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + utilisateur
+				+ ", encheres=" + encheres + ", categorie=" + categorie + ", retrait=" + retrait + "]";
+	}
 }

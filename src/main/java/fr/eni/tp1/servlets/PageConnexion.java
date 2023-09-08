@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
+import fr.eni.tp1.bll.ArticleVenduManager;
 import fr.eni.tp1.bll.UtilisateurManager;
+import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.bo.Utilisateur;
 
 
@@ -39,8 +42,9 @@ public class PageConnexion extends HttpServlet {
 		}
 		else {
 			session.setAttribute("utilisateurId", utilisateur.getNoUtilisateur());
-			request.setAttribute("utilisateur", utilisateur.getNoUtilisateur());
-
+			List<ArticleVendu> articleVendus= ArticleVenduManager.getInstance().selectAll();
+			
+			request.setAttribute("articles", articleVendus);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		}
 		

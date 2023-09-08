@@ -23,8 +23,8 @@ public class ArticleVenduManager {
 		return DAOFactory.getDAOArticleVendu().selectAll();
 	}
 	
-	public void insert(ArticleVendu articleVendu) {
-		DAOFactory.getDAOArticleVendu().insert(articleVendu);
+	public void insert(ArticleVendu articleVendu,int no_utilisateur,int no_categorie) {
+		DAOFactory.getDAOArticleVendu().insert(articleVendu,no_utilisateur, no_categorie);
     }
 
     public void delete(int noarticle) {

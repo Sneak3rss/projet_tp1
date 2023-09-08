@@ -23,4 +23,5 @@ public interface DAOUtilisateur {
 	void delete(int noUtilisateur);
 	
 	Utilisateur selectByIDUtilisateur(String pseudo, String motDePas) ;
+	Utilisateur selectByID2Utilisateur(int id);
 }

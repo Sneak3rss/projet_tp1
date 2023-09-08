@@ -44,14 +44,15 @@ public class Inscrire extends HttpServlet {
         	UtilisateurManager.getInstance().insertUtilisateur(utilisateur);
         	
         	request.setAttribute("registirion", "Enregistrement réussi!");
-    		request.getRequestDispatcher("/WEB-INF/inscrire.jsp").forward(request, response);
+    		doGet(request, response);
         	
         	
         } else {
+        	
         	request.setAttribute("registirion", "Les mots de passe ne correspondent pas!");
-    		request.getRequestDispatcher("/WEB-INF/inscrire.jsp").forward(request, response);
+    		doGet(request, response);
         }
-		doGet(request, response);
+        
 	}
 
 }

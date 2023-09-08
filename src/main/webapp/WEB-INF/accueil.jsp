@@ -17,68 +17,87 @@
 
 	<div class="container">
 
-		<c:choose>
-			<c:when test="${utilisateur == 1}">
 
-				<header
-					class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-					<div class="col-md-3 mb-2 mb-md-0">
-						<a href="/"
-							class="d-inline-flex link-body-emphasis text-decoration-none">
-							<svg class="bi" width="40" height="32" role="img"
-								aria-label="Bootstrap">
+
+		<header
+			class="d-flex flex-wrap 	align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+			<div class="col-md-3 mb-2 mb-md-0">
+				<a href="/"
+					class="d-inline-flex link-body-emphasis text-decoration-none">
+					<svg class="bi" width="40" height="32" role="img"
+						aria-label="Bootstrap">
 							<use xlink:href="#bootstrap"></use></svg>
-						</a>
-					</div>
+				</a>
+			</div>
+			<c:choose>
+				<c:when test="${utilisateurId>0}">
 
-					<ul
-						class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-						<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
-						<li><a href="#" class="nav-link px-2">Vendre un Article</a></li>
-						<li><a href="#" class="nav-link px-2">Mon Profil</a></li>
+					<c:choose>
+						<c:when test="${utilisateurId > 0 }">
+							<ul
+								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
+								<li><a href="VendreArticle" class="nav-link px-2">Vendre
+										un Article</a></li>
+								<li><a href="#" class="nav-link px-2">Mon Profil</a></li>
 
-					</ul>
+							</ul>
+
+						</c:when>
+					</c:choose>
+
 
 					<div class="col-md-3 text-end">
-						<button type="button" class="btn btn-primary">Déconnexion</button>
+						<form action="accueil" method="post">
+							<button type="submit" class="btn btn-primary" value="0"
+								name="deconnexion">Déconnexion</button>
+						</form>
 					</div>
-				</header>
-			</c:when>
+				</c:when>
+				<c:otherwise>
 
-			<c:otherwise>
+					<c:choose>
+						<c:when test="${utilisateurId > 0 }">
+							<ul
+								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
+								<li><a href="VendreArticle" class="nav-link px-2">Vendre
+										un Article</a></li>
+								<li><a href="#" class="nav-link px-2">Mon Profil</a></li>
 
-				<header
-					class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-					<div class="col-md-3 mb-2 mb-md-0">
-						<a href="/"
-							class="d-inline-flex link-body-emphasis text-decoration-none">
-							<svg class="bi" width="40" height="32" role="img"
-								aria-label="Bootstrap">
-							<use xlink:href="#bootstrap"></use></svg>
-						</a>
-					</div>
+							</ul>
+							<div class="col-md-3 text-end">
 
-					<h3 class="nav col-12 col-md-auto mb-2 mb-md-0">ENI-Encheres</h3>
+								<form action="accueil" method="post">
+									<button type="submit" class="btn btn-primary" value="0"
+										name="deconnexion">Déconnexion</button>
+								</form>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<h3 class="nav col-12 col-md-auto mb-2 mb-md-0">ENI-Encheres</h3>
 
-					<div class="col-md-3 text-end">
-						<a href="PageConnexion" class="nav-link px-2">S'incrire-Se
-							connecter</a>
-					</div>
+							<div class="col-md-3 text-end">
+								<a href="PageConnexion" class="nav-link px-2">S'incrire-Se
+									connecter</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
-				</header>
+				</c:otherwise>
+			</c:choose>
 
-			</c:otherwise>
+		</header>
 
 
 
-		</c:choose>
 		<div class="container">
 
 			<div class="row g-3 mb-3 ">
 				<form>
-				
-				<span><strong> Filters :</strong> </span>	
-					
+
+					<span><strong> Filters :</strong> </span>
+
 					<div class="col-md-4 mb-3">
 
 						<input class="form-control me-2" type="search"
@@ -104,7 +123,7 @@
 
 						</div>
 						<button class="btn btn-outline-success col-md-3 " type="submit">Search</button>
-						
+
 					</div>
 
 
@@ -117,30 +136,49 @@
 
 			<div class="container">
 
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+				<div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+				<c:forEach var="article" items="${requestScope['articles']}">
+					
 					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%"
-								height="150" xmlns="http://www.w3.org/2000/svg" role="img"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
+							<div class="card shadow-sm">
+								<svg class="bd-placeholder-img card-img-top" width="100%"
+									height="150" xmlns="http://www.w3.org/2000/svg" role="img"
+									preserveAspectRatio="xMidYMid slice" focusable="false">
 							<title>Placeholder</title><rect width="100%" height="100%"
-									fill="#55595c"></rect>
+										fill="#55595c"></rect>
 							</svg>
-							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+								<div class="card-body">
+									<ul class="card-text" style="list-style-type:none;">
+										<li>Aticle Nom :   ${article.nomArticle}</li>
+										<li>Prix :    ${article.miseAPrix}</li>
+										<li>Fin de L'enchére :   ${article.dateFinencheres}</li>
+										<li>Vendor :   ${article.utilisateur.nom}</li>
+									</ul>
+									<div class="d-flex justify-content-center align-items-center">
+										<div class="btn-group">
+											<button type="button"
+												class="btn btn-sm btn-outline-secondary">View</button>
+										<c:choose>
+										  <c:when test="${article.utilisateur.noUtilisateur == utilisateurId }">
+										  	<form action="accueil" method="post">
+										  	
+	
+										  	<button type="submit"
+												class="btn btn-sm btn-outline-secondary" name="edit" value="${article.noarticle}">Edit</button>
+												
+											</form>
+										  </c:when>
+										</c:choose>
+										
+										</div>
 									</div>
-									<small class="text-body-secondary">9 mins</small>
 								</div>
 							</div>
-						</div>
+
 
 					</div>
+										</c:forEach>
+				
 				</div>
 			</div>
 		</div>

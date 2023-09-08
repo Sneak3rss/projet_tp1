@@ -21,9 +21,13 @@ public class UtilisateurManager {
 	
 		return DAOFactory.getDaoUtilisateur().selectByIDUtilisateur(pseudo, pssword);
 	}
-	
+	public Utilisateur getUtilisateurId(int id) {
+		
+		return DAOFactory.getDaoUtilisateur().selectByID2Utilisateur(id);
+	}
 	public void insertUtilisateur( Utilisateur utilisateur) {
 		
 		DAOFactory.getDaoUtilisateur().insert(utilisateur);
 	}
+	
 }

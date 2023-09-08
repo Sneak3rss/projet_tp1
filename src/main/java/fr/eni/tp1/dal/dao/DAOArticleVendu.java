@@ -10,7 +10,7 @@ public interface DAOArticleVendu {
 	
 	
 	// CREATE
-	void insert (ArticleVendu articleVendu);
+	void insert (ArticleVendu articleVendu,int no_utilisateur,int no_categorie);
 	
 	ArticleVendu selectById(int noarticle);
 	

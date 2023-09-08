@@ -15,7 +15,7 @@
 </head>
 <body>
 	<header
-		class="d-flex  align-items-center  py-3 border-bottom">
+		class="d-flex align-items-center py-3 border-bottom">
 		<div class="mb-2 mb-md-0">
 			<a href="accueil"
 				class="d-inline-flex link-body-emphasis text-decoration-none"> <svg

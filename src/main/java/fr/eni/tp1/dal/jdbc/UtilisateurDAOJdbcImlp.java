@@ -20,6 +20,9 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 	private final static String SELECT_BYID = """
 			select * from UTILISATEURS Where pseudo=? and mot_de_passe=?
 				""";
+	private final static String SELECT_BYID2 = """
+			select * from UTILISATEURS Where no_utilisateur=?
+				""";
 	private final static String INSERT_UTILISATEUR = """
 			INSERT INTO UTILISATEURS(pseudo, nom, prenom, 
             email,telephone, rue,code_postal,ville,mot_de_passe,credit,administrateur)
@@ -84,7 +87,38 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 		return this.utilisateur;
 
 	}
+	public Utilisateur selectByID2Utilisateur(int id) {
 
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_BYID);
+			psmt.setInt(1, id);
+			ResultSet rstSet = psmt.executeQuery();
+			
+			while (rstSet.next()) {
+				int no_utilisateur = rstSet.getInt("no_utilisateur");
+				String pseudoUti = rstSet.getString("pseudo");
+				String nom = rstSet.getString("nom");
+				String prenom = rstSet.getString("prenom");
+				String email = rstSet.getString("email");
+				String telephone = rstSet.getString("telephone");
+				String rue = rstSet.getString("rue");
+				String code_postal = rstSet.getString("code_postal");
+				String ville = rstSet.getString("ville");
+				String mot_de_passe = rstSet.getString("mot_de_passe");
+				int credit = rstSet.getInt("credit");
+				String administrateur = rstSet.getString("administrateur");
+
+				this.utilisateur = new Utilisateur(no_utilisateur, pseudoUti, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, null);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return this.utilisateur;
+
+	}
+	
 	@Override
 	public List<Utilisateur> selectAll() {
 		return null;
