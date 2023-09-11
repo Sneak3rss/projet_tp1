@@ -11,43 +11,38 @@ import java.io.IOException;
 import java.util.List;
 
 import fr.eni.tp1.bll.ArticleVenduManager;
+import fr.eni.tp1.bll.CatalogManager;
 import fr.eni.tp1.bll.UtilisateurManager;
 import fr.eni.tp1.bo.ArticleVendu;
+import fr.eni.tp1.bo.Categorie;
 import fr.eni.tp1.bo.Utilisateur;
 
-
-public class PageConnexion extends HttpServlet {
+public class Profil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public PageConnexion() {
+	Utilisateur utilisateur ;
+    
+    public Profil() {
         super();
+ 
     }
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			
-			request.getRequestDispatcher("/WEB-INF/pageConnexion.jsp").forward(request, response);
+		HttpSession session = request.getSession();	
+		int id = (int) session.getAttribute("utilisateurId");
+		
+		this.utilisateur = UtilisateurManager.getInstance().getUtilisateurId(id);
+		request.setAttribute("utilisateur", utilisateur);
+		request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur utilisateur =null;
-		String pseudo= request.getParameter("pseudo");
-		String password= request.getParameter("password");
-		utilisateur = UtilisateurManager.getInstance().getUtilisateur(pseudo, password);
-		HttpSession session = request.getSession();
+		
+		
+		request.setAttribute("utilisateur", utilisateur);
+		request.getRequestDispatcher("/WEB-INF/inscrire.jsp").forward(request, response);
 
-		if (utilisateur== null) {		
-			doGet(request, response);	
-		}
-		else {
-			session.setAttribute("utilisateurId", utilisateur.getNoUtilisateur());
-
-			List<ArticleVendu> articleVendus= ArticleVenduManager.getInstance().selectAll();
-			
-			request.setAttribute("articles", articleVendus);
-			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-		}
 		
 	}
 

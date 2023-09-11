@@ -30,4 +30,9 @@ public class UtilisateurManager {
 		DAOFactory.getDaoUtilisateur().insert(utilisateur);
 	}
 	
+	public void updateUtilisateur(Utilisateur utilasatuer ) {
+		
+		DAOFactory.getDaoUtilisateur().update(utilasatuer);;
+	}
+	
 }

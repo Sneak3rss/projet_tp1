@@ -39,7 +39,8 @@
 								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
 								<li><a href="VendreArticle" class="nav-link px-2">Vendre
 										un Article</a></li>
-								<li><a href="#" class="nav-link px-2">Mon Profil</a></li>
+								
+								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
 
 							</ul>
 
@@ -61,9 +62,8 @@
 							<ul
 								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
-								<li><a href="VendreArticle" class="nav-link px-2">Vendre
-										un Article</a></li>
-								<li><a href="#" class="nav-link px-2">Mon Profil</a></li>
+								<li><a href="VendreArticle" class="nav-link px-2">Vendre un Article</a></li>
+								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
 
 							</ul>
 							<div class="col-md-3 text-end">

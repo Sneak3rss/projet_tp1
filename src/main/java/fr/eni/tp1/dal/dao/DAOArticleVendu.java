@@ -1,5 +1,6 @@
 package fr.eni.tp1.dal.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.tp1.bo.ArticleVendu;
@@ -12,14 +13,14 @@ public interface DAOArticleVendu {
 	// CREATE
 	void insert (ArticleVendu articleVendu,int no_utilisateur,int no_categorie);
 	
-	ArticleVendu selectById(int noarticle);
+	ArticleVendu selectById(int noarticle) ;
 	
 	// READ
-	List<ArticleVendu> selectAll();
+	List<ArticleVendu> selectAll() ;
     
     // UPDATE
-    void update (ArticleVendu articleVendu);
+    void update (ArticleVendu articleVendu) ;
     
     // DELETE
-    void delete (int noarticle);
+    void delete (int noarticle) ;
 }

@@ -28,6 +28,11 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
             email,telephone, rue,code_postal,ville,mot_de_passe,credit,administrateur)
             VALUES (?,?,?,?,?,?,?,?,?,?,?);
 				""";
+	
+	private final static String UPDATE_UTILISATEUR = """
+			UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?
+			WHERE no_utilisateur = ?
+			""";
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -90,7 +95,7 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 	public Utilisateur selectByID2Utilisateur(int id) {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement psmt = cnx.prepareStatement(SELECT_BYID);
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_BYID2);
 			psmt.setInt(1, id);
 			ResultSet rstSet = psmt.executeQuery();
 			
@@ -117,8 +122,8 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 
 		return this.utilisateur;
 
-	}
-	
+	}	
+
 	@Override
 	public List<Utilisateur> selectAll() {
 		return null;
@@ -126,7 +131,26 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 
 	@Override
 	public void update(Utilisateur utilisateur) {
-
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
+			pStmt.setString(1,utilisateur.getPseudo());
+			pStmt.setString(2, utilisateur.getNom());
+			pStmt.setString(3, utilisateur.getPrenom());
+			pStmt.setString(4, utilisateur.getEmail());
+			pStmt.setString(5, utilisateur.getTelephone());
+			pStmt.setString(6,utilisateur.getRue());
+			pStmt.setString(7,utilisateur.getCodePostal());
+			pStmt.setString(8,utilisateur.getVille());
+			pStmt.setString(9,utilisateur.getMotDePasse());
+			pStmt.setInt(10,utilisateur.getCredit());
+			pStmt.setInt(11,utilisateur.getNoUtilisateur());
+			pStmt.executeUpdate();
+			
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	@Override

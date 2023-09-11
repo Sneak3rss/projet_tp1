@@ -44,4 +44,14 @@
     <servlet-name>Inscrire</servlet-name>
     <url-pattern>/Inscrire</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Profil</display-name>
+    <servlet-name>Profil</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.Profil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Profil</servlet-name>
+    <url-pattern>/Profil</url-pattern>
+  </servlet-mapping>
 </web-app>
