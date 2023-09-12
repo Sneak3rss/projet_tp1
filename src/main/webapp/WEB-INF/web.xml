@@ -46,7 +46,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>Profil</display-name>
     <servlet-name>Profil</servlet-name>
     <servlet-class>fr.eni.tp1.servlets.Profil</servlet-class>
@@ -54,14 +53,15 @@
   <servlet-mapping>
     <servlet-name>Profil</servlet-name>
     <url-pattern>/Profil</url-pattern>
-=======
+  </servlet-mapping>
+    <servlet>
+    <description></description> 
     <display-name>Enchrir</display-name>
     <servlet-name>Enchrir</servlet-name>
     <servlet-class>fr.eni.tp1.servlets.Enchrir</servlet-class>
   </servlet>
-  <servlet-mapping>
+    <servlet-mapping>
     <servlet-name>Enchrir</servlet-name>
     <url-pattern>/Enchrir</url-pattern>
->>>>>>> branch 'master' of https://github.com/theo-verger1/projet_tp1.git
   </servlet-mapping>
 </web-app>

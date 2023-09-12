@@ -217,7 +217,6 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			} else {
 				int i = 0;
 				do {
-					System.out.println(i);
 					if (i <= 0) {
 
 						int no_article = rstSet.getInt("no_article");

@@ -96,7 +96,7 @@
 		
 		
 	<div class="container mt-5">
-		<h2 class="form-title">Modification Compte</h2>
+		<h2 class="form-title">Registirion Compte</h2>
 		<form action="Inscrire" method="post">
 			<div class="row">
 				<div class="col-md-5">
@@ -152,7 +152,7 @@
 					</div>
 				</div>
 			</div>
-			 <button type="submit" class="btn btn-primary">S'Inscrire</button>
+			 <button type="submit" name="inscrire" class="btn btn-primary">S'Inscrire</button>
 			 <a href="accueil" class="btn btn-danger">Annuler</a>
 			 
 				<c:choose>

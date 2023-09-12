@@ -41,7 +41,6 @@
 			</div>
 			<div class="col-md-6">
 				<div class="row">
-
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">Article :</label>
 						<div class="col-sm-8">
@@ -134,7 +133,19 @@
 						<form action="Enchrir" method="post">
 							<input type="number" class="form-control" name="offre"
 								value="${articleVendu.miseAPrix}">
-							<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
+							<input type="hidden" name="articleId" value="${articleVendu.noarticle }"  >
+							<input type="hidden" name="utilisateurId" value="${articleVendu.utilisateur.noUtilisateur }" >
+								
+								<c:choose>
+							 	<c:when test="${utilisateurId>0 }">
+								<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
+							 	
+							 	</c:when>
+							 	<c:otherwise>
+							<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
+							 	
+							 	</c:otherwise>
+							</c:choose>
 						</form>
 					</div>
 				</div>
