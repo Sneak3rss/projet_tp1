@@ -32,7 +32,12 @@ public class UtilisateurManager {
 	
 	public void updateUtilisateur(Utilisateur utilasatuer ) {
 		
-		DAOFactory.getDaoUtilisateur().update(utilasatuer);;
+		DAOFactory.getDaoUtilisateur().update(utilasatuer);
+	}
+	
+	public void updateCredit(Utilisateur utilasatuer ) {
+		
+		DAOFactory.getDaoUtilisateur().updateCredit(utilasatuer);
 	}
 	
 }

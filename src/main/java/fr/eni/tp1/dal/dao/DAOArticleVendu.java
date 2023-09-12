@@ -23,4 +23,5 @@ public interface DAOArticleVendu {
     
     // DELETE
     void delete (int noarticle) ;
+    public List<ArticleVendu> selectCetagorieAll(int categorieId);
 }

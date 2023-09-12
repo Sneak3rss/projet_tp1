@@ -134,18 +134,27 @@
 							<input type="number" class="form-control" name="offre"
 								value="${articleVendu.miseAPrix}">
 							<input type="hidden" name="articleId" value="${articleVendu.noarticle }"  >
-							<input type="hidden" name="utilisateurId" value="${articleVendu.utilisateur.noUtilisateur }" >
+							<input type="hidden" name="utilisateurId" value="${utilisateurId}" >
 								
 								<c:choose>
-							 	<c:when test="${utilisateurId>0 }">
+							 	<c:when test="${utilisateurId>0 && utilisateurId != articleVendu.utilisateur.noUtilisateur }">
 								<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
 							 	
 							 	</c:when>
 							 	<c:otherwise>
-							<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
+									<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
 							 	
 							 	</c:otherwise>
 							</c:choose>
+							
+							<c:choose>
+								<c:when test="${not empty message }">
+									 <div class="mt-3 text-danger">
+										 ${message}
+									</div>
+								</c:when>
+							</c:choose>
+							
 						</form>
 					</div>
 				</div>

@@ -17,7 +17,7 @@ public class Utilisateur {
      private String ville;
      private String motDePasse;
      private int credit;
- 
+     public static String typeString;
 	private String administrateur;
      
      private Enchere enchere;
@@ -30,13 +30,20 @@ public class Utilisateur {
  				+ ", administrateur=" + administrateur + ", enchere=" + enchere + ", articlesVendus=" + articlesVendus
  				+ "]";
  	}
-
+  
      // CONSTRUCTEURS
      public Utilisateur() {
-         super();
+    	
      }
+     public static String type= "laptop";
 
-
+     static void calcule(int a, int b) {
+    	 System.out.println("calcule :"+ a +b);
+     }
+    public void calcule1(int a, int b) {
+    	 System.out.println("calcule :"+ a +b);
+     }
+     
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
              String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur,
             Enchere enchere, List<ArticleVendu> articlesVendus) {
@@ -96,6 +103,7 @@ public class Utilisateur {
          this.credit = credit;
       
      }
+   
      // METHODES
      public void addArticleVendu(ArticleVendu articleVendu ) {
          articlesVendus.add(articleVendu);

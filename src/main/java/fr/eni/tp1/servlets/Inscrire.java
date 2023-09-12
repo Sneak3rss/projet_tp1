@@ -53,6 +53,7 @@ public class Inscrire extends HttpServlet {
 							ville, motDePasse2, credit);
 					utilisateur.setNoUtilisateur(id);
 					utilisateur.setAdministrateur("false");
+					session.setAttribute("credit", credit);
 
 					UtilisateurManager.getInstance().updateUtilisateur(utilisateur);
 					request.setAttribute("registirion", "Modification réussi!");

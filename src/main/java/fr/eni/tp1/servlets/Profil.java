@@ -29,9 +29,21 @@ public class Profil extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();	
-		int id = (int) session.getAttribute("utilisateurId");
 		
+		
+		if (session.getAttribute("utilisateurId") != null) {
+			
+		int id = (int) session.getAttribute("utilisateurId");
 		this.utilisateur = UtilisateurManager.getInstance().getUtilisateurId(id);
+
+		}
+		if (request.getParameter("utId") != null) {
+			int idParameter= Integer.parseInt(request.getParameter("utId"));
+			this.utilisateur = UtilisateurManager.getInstance().getUtilisateurId(idParameter);
+
+		}
+		
+		
 		request.setAttribute("utilisateur", utilisateur);
 		request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
 	}

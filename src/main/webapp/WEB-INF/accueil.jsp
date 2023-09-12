@@ -49,16 +49,22 @@
 
 
 					<div class="col-md-3 text-end">
-						<form action="accueil" method="post">
+						<div class="row justify-content-center align-items-center">
+							<button type="button" class="col-5 btn btn-success"
+										> Credit : ${credit}</button>
+						<form  class="col-5" action="accueil" method="post">
 							<button type="submit" class="btn btn-primary" value="0"
 								name="deconnexion">Déconnexion</button>
 						</form>
+						</div>
+						
 					</div>
 				</c:when>
 				<c:otherwise>
 
 					<c:choose>
 						<c:when test="${utilisateurId > 0 }">
+						
 							<ul
 								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
@@ -67,7 +73,7 @@
 
 							</ul>
 							<div class="col-md-3 text-end">
-
+							
 								<form action="accueil" method="post">
 									<button type="submit" class="btn btn-primary" value="0"
 										name="deconnexion">Déconnexion</button>
@@ -93,8 +99,8 @@
 
 		<div class="container">
 
-			<div class="row g-3 mb-3 ">
-				<form>
+			<div class="row g-3 mb-3 align-items-center ">
+				<form action="accueil" method="post">
 
 					<span><strong> Filters :</strong> </span>
 
@@ -104,33 +110,32 @@
 							placeholder="Search" aria-label="Search">
 
 					</div>
-					<div class="row align-items-center">
-						<div class="col-md-2 mb-3">
+					
+					<div class="row align-items-center mb-3">
+					
+						<div class="col-md-2">
 							<div class="form-floating">
 								<span>Categories :</span>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="col-md-5 form-floating">
-								<select class="form-select" id="floatingSelectGrid">
-									<option selected>Open this select menu</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select> <label for="floatingSelectGrid">Works with selects</label>
-
+						<div class="col-md-5">
+							<div class="col-md-4">
+								<select name="categorie" class="form-select "
+											aria-label="Default select example">
+									<c:forEach var="cat" items="${requestScope['categories']}">
+												<option value="${cat.noCategorie }">${cat.libelle}</option>
+									</c:forEach>
+								</select>
 							</div>
 
 						</div>
 						<button class="btn btn-outline-success col-md-3 " type="submit">Search</button>
-
+						
 					</div>
-
-
-				</form>
+			
+			</form>
+			
 			</div>
-
-
 		</div>
 		<div class="album py-5 bg-body-tertiary">
 
@@ -152,7 +157,7 @@
 										<li>Aticle Nom : ${article.nomArticle}</li>
 										<li>Prix : ${article.miseAPrix}</li>
 										<li>Fin de L'enchére : ${article.dateFinencheres}</li>
-										<li>Vendor : ${article.utilisateur.nom}</li>
+										<li>Vendor :<a href="/projet_tp1/Profil?utId=${article.utilisateur.noUtilisateur}">${article.utilisateur.nom}</a> </li>
 									</ul>
 									<div class="d-flex justify-content-center align-items-center">
 										<div class="btn-group">

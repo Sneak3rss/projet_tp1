@@ -2,6 +2,8 @@ package fr.eni.tp1.bll;
 
 import java.util.List;
 
+import org.eclipse.tags.shaded.org.apache.regexp.recompile;
+
 import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.dal.dao.DAOFactory;
 
@@ -38,4 +40,9 @@ public class ArticleVenduManager {
     public ArticleVendu selectById(int noarticle) {
         return DAOFactory.getDAOArticleVendu().selectById(noarticle);
     }
+    
+     public List<ArticleVendu> selectCetagorieAll(int categorieId){
+    	 
+    	 return DAOFactory.getDAOArticleVendu().selectCetagorieAll(categorieId);
+     }
 }

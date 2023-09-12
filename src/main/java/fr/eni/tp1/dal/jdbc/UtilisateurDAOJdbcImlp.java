@@ -33,6 +33,11 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 			UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?
 			WHERE no_utilisateur = ?
 			""";
+	
+	private final static String UPDATE_UTILISATEUR_CREDIT = """
+			UPDATE UTILISATEURS SET credit=?
+			WHERE no_utilisateur = ?
+			""";
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -144,6 +149,20 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 			pStmt.setString(9,utilisateur.getMotDePasse());
 			pStmt.setInt(10,utilisateur.getCredit());
 			pStmt.setInt(11,utilisateur.getNoUtilisateur());
+			pStmt.executeUpdate();
+			
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateCredit(Utilisateur utilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_UTILISATEUR_CREDIT);
+			pStmt.setInt(1,utilisateur.getCredit());
+			pStmt.setInt(2,utilisateur.getNoUtilisateur());
 			pStmt.executeUpdate();
 			
 		

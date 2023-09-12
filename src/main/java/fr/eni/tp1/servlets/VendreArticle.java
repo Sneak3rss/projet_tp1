@@ -13,8 +13,10 @@ import java.util.List;
 
 import fr.eni.tp1.bll.ArticleVenduManager;
 import fr.eni.tp1.bll.CatalogManager;
+import fr.eni.tp1.bll.EnchrirManager;
 import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.bo.Categorie;
+import fr.eni.tp1.bo.Enchere;
 import fr.eni.tp1.bo.Retrait;
 
 public class VendreArticle extends HttpServlet {
@@ -26,7 +28,6 @@ public class VendreArticle extends HttpServlet {
 	}
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		super.init();
 	}
 
@@ -52,7 +53,7 @@ public class VendreArticle extends HttpServlet {
 		String dateDebutencheres = request.getParameter("dateDebutencheres");
 		LocalDate dateDebut = LocalDate.parse(dateDebutencheres);
 		String dateFinencheres = request.getParameter("dateFinencheres");
-		LocalDate dateFinen = LocalDate.parse(dateDebutencheres);
+		LocalDate dateFinen = LocalDate.parse(dateFinencheres);
 	
 		ArticleVendu articleVendu = new ArticleVendu(articleNom, description, dateDebut, dateFinen, miseAPrix, "EC");
 		String rue = request.getParameter("rue");
@@ -70,8 +71,10 @@ public class VendreArticle extends HttpServlet {
 		}
 		else if (request.getParameter("suprimer") != null) {
 			int articleId= Integer.parseInt(request.getParameter("suprimer"));
-			ArticleVenduManager.getInstance().delete(articleId);		
-			
+			Enchere enchrir= new Enchere();
+			enchrir.setNoArticle(articleId);
+			EnchrirManager.getInstance().suprimerEnchirir(enchrir);
+			ArticleVenduManager.getInstance().delete(articleId);			
 		}
 		else {
 		

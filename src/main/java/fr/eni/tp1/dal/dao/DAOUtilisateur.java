@@ -21,6 +21,7 @@ public interface DAOUtilisateur {
 	
 	// DELETE
 	void delete(int noUtilisateur);
+	void updateCredit(Utilisateur utilisateur);
 	
 	Utilisateur selectByIDUtilisateur(String pseudo, String motDePas) ;
 	Utilisateur selectByID2Utilisateur(int id);

@@ -42,7 +42,7 @@ public class PageConnexion extends HttpServlet {
 		}
 		else {
 			session.setAttribute("utilisateurId", utilisateur.getNoUtilisateur());
-
+			session.setAttribute("credit", utilisateur.getCredit());
 			List<ArticleVendu> articleVendus= ArticleVenduManager.getInstance().selectAll();
 			
 			request.setAttribute("articles", articleVendus);

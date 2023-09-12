@@ -27,6 +27,15 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur
 			      ORDER BY ARTICLES_VENDUS.no_article;
 			      """;
+	
+	private final static String SELECT_CATEGORIE = """
+	    	SELECT * FROM ARTICLES_VENDUS
+	      INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie
+		  INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur
+	      WHERE CATEGORIES.no_categorie=?
+	      ORDER BY ARTICLES_VENDUS.no_article;
+	      """;
+	
 	private final static String SELECT_BY_ID = """
 
 			SELECT ARTICLES_VENDUS.no_article , ARTICLES_VENDUS.nom_article ,
@@ -55,8 +64,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			CATEGORIES.libelle,UTILISATEURS.pseudo,nom,RETRAITS.rue,
 			RETRAITS.code_postal,RETRAITS.ville
 			         FROM ARTICLES_VENDUS
-			         INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie
-			   INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur
+			INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie
+			INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur
 			INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article
 			   WHERE ARTICLES_VENDUS.no_article=?
 			         """;
@@ -91,6 +100,42 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			Statement stmtStatement = cnx.createStatement();
 			ResultSet rstSet = stmtStatement.executeQuery(SELECT_ALL);
+			while (rstSet.next()) {
+				int no_article = rstSet.getInt("no_article");
+				String nom_article = rstSet.getString("nom_article");
+				String description = rstSet.getString("description");
+				Date date_debut_encheres = rstSet.getDate("date_debut_encheres");
+				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
+				Double prix_initial = rstSet.getDouble("prix_initial");
+				Double prix_vente = rstSet.getDouble("prix_initial");
+				String etat_vente = rstSet.getString("etat_vente");
+				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
+				String utilisateurNomString = rstSet.getString("pseudo");
+
+				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
+						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
+						etat_vente);
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNom(utilisateurNomString);
+				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
+				articleVendu.setUtilisateur(utilisateur);
+				articleVendus.add(articleVendu);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return articleVendus;
+	}
+	@Override
+	public List<ArticleVendu> selectCetagorieAll(int categorieId) {
+		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement stmtStatement= cnx.prepareStatement(SELECT_CATEGORIE);
+			stmtStatement.setInt(1, categorieId);
+			ResultSet rstSet = stmtStatement.executeQuery();
 			while (rstSet.next()) {
 				int no_article = rstSet.getInt("no_article");
 				String nom_article = rstSet.getString("nom_article");
