@@ -129,10 +129,10 @@
 
 							<div class="row">
 								<div class="col-3 mt-3">
-									<button type="submit" class="btn btn-warning" name="modify"  value="${articleVendu.noarticle}">Modify</button>
+									<button type="submit" class="btn btn-warning" name="modify"  value="${articleVendu.noarticle}">Enregistrer</button>
 								</div>
 								<div class="col-3 mt-3">
-									<button type="submit" class="btn btn-danger " name="suprimer" value="suprimer">Suprimer</button>
+									<button type="submit" class="btn btn-danger " name="suprimer"  value="${articleVendu.noarticle}">Annuler la Vente</button>
 								</div>
 
 								<div class="col-3 mt-3">
