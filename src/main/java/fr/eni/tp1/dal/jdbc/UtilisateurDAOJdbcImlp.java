@@ -90,7 +90,7 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 	public Utilisateur selectByID2Utilisateur(int id) {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement psmt = cnx.prepareStatement(SELECT_BYID);
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_BYID2);
 			psmt.setInt(1, id);
 			ResultSet rstSet = psmt.executeQuery();
 			

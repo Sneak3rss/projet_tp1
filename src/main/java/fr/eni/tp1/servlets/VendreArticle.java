@@ -59,10 +59,7 @@ public class VendreArticle extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		articleVendu.setRetrait(new Retrait(rue, codePostal, ville));
-		
-		System.out.println(articleVendu.getRetrait().toString());
-		
-		
+				
 		articleVendu.getCategorie().setNoCategorie(categorie);
 		
 		if (request.getParameter("modify") != null) {
@@ -72,7 +69,9 @@ public class VendreArticle extends HttpServlet {
 			
 		}
 		else if (request.getParameter("suprimer") != null) {
-			///
+			int articleId= Integer.parseInt(request.getParameter("suprimer"));
+			ArticleVenduManager.getInstance().delete(articleId);		
+			
 		}
 		else {
 		

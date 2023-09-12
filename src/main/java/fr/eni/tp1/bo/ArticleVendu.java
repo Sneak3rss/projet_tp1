@@ -19,7 +19,7 @@ public class ArticleVendu {
     private Utilisateur utilisateur;
    
 	
-	private List<Enchere> encheres = new ArrayList<>();
+	private List<Enchere> encheres;
     private Categorie categorie;
     private Retrait retrait;
     
@@ -50,7 +50,7 @@ public class ArticleVendu {
         this.prixVente = prixVente;
         this.etatVente = etatVente;
         this.utilisateur = utilisateur;
-        this.encheres = encheres;
+        encheres= new ArrayList<Enchere>();
         this.categorie = categorie;
         this.retrait = retrait;
     }
@@ -69,6 +69,7 @@ public class ArticleVendu {
         this.etatVente = etatVente;
         this.categorie = new Categorie();
         this.retrait = new Retrait();
+    	this.encheres = new ArrayList<Enchere>();
     }
     public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
             LocalDate dateFinencheres, double miseAPrix, double prixVente, String etatVente) {
@@ -82,6 +83,9 @@ public class ArticleVendu {
         this.etatVente = etatVente;
         this.categorie = new Categorie();
         this.retrait = new Retrait();
+    	this.encheres = new ArrayList<Enchere>();
+
+        
     }
 
     public ArticleVendu( String nomArticle, String descrition, LocalDate dateDebutencheres,
@@ -95,6 +99,8 @@ public class ArticleVendu {
         this.etatVente = etatVente;
         this.categorie = new Categorie();
         this.retrait = new Retrait();
+    	this.encheres = new ArrayList<Enchere>();
+
     }
     
     // METHODE

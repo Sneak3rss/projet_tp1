@@ -44,4 +44,14 @@
     <servlet-name>Inscrire</servlet-name>
     <url-pattern>/Inscrire</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Enchrir</display-name>
+    <servlet-name>Enchrir</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.Enchrir</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Enchrir</servlet-name>
+    <url-pattern>/Enchrir</url-pattern>
+  </servlet-mapping>
 </web-app>

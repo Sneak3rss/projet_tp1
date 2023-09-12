@@ -137,9 +137,9 @@
 			<div class="container">
 
 				<div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
-				<c:forEach var="article" items="${requestScope['articles']}">
-					
-					<div class="col">
+					<c:forEach var="article" items="${requestScope['articles']}">
+
+						<div class="col">
 							<div class="card shadow-sm">
 								<svg class="bd-placeholder-img card-img-top" width="100%"
 									height="150" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -148,37 +148,43 @@
 										fill="#55595c"></rect>
 							</svg>
 								<div class="card-body">
-									<ul class="card-text" style="list-style-type:none;">
-										<li>Aticle Nom :   ${article.nomArticle}</li>
-										<li>Prix :    ${article.miseAPrix}</li>
-										<li>Fin de L'enchére :   ${article.dateFinencheres}</li>
-										<li>Vendor :   ${article.utilisateur.nom}</li>
+									<ul class="card-text" style="list-style-type: none;">
+										<li>Aticle Nom : ${article.nomArticle}</li>
+										<li>Prix : ${article.miseAPrix}</li>
+										<li>Fin de L'enchére : ${article.dateFinencheres}</li>
+										<li>Vendor : ${article.utilisateur.nom}</li>
 									</ul>
 									<div class="d-flex justify-content-center align-items-center">
 										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-										<c:choose>
-										  <c:when test="${article.utilisateur.noUtilisateur == utilisateurId }">
-										  	<form action="accueil" method="post">
-										  	
-	
-										  	<button type="submit"
-												class="btn btn-sm btn-outline-secondary" name="edit" value="${article.noarticle}">Edit</button>
-												
+											<form action="accueil" method="post">
+
+												<button type="submit"
+													class="btn btn-sm btn-outline-secondary" name="view"
+													value="${article.noarticle}">View</button>
+													
 											</form>
-										  </c:when>
-										</c:choose>
-										
+												<c:choose>
+													<c:when
+														test="${article.utilisateur.noUtilisateur == utilisateurId }">
+														<form action="accueil" method="post">
+
+
+															<button type="submit"
+																class="btn btn-sm btn-outline-secondary" name="edit"
+																value="${article.noarticle}">Edit</button>
+
+														</form>
+													</c:when>
+												</c:choose>
 										</div>
 									</div>
 								</div>
 							</div>
 
 
-					</div>
-										</c:forEach>
-				
+						</div>
+					</c:forEach>
+
 				</div>
 			</div>
 		</div>
