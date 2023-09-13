@@ -141,15 +141,21 @@
 									test="${utilisateurId != articleVendu.utilisateur.noUtilisateur}">
 									<c:choose>
 										<c:when test="${dateControl<0}">
-											<button type="submit" class="btn btn-warning mt-3 hidden">Enchérir</button>
+											<div class="alert alert-light mt-3" role="alert">
+											Cette enchère est déjà terminée.</div>
 
 										</c:when>
 										<c:when test="${debutDateControl>0}">
-												<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
-
+											<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
+											<div class="alert alert-warning mt-3" role="alert">
+											Cette vente aux enchères débutera dans ${dateControl} jours .</div>
 										</c:when>
+										<c:otherwise>
+											<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
+
+										</c:otherwise>
+
 									</c:choose>
-									<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
 
 								</c:when>
 								<c:otherwise>

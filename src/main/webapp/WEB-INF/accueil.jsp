@@ -122,8 +122,10 @@
 							<div class="col-md-4">
 								<select name="categorie" class="form-select "
 											aria-label="Default select example">
+										<option value="0">Toutes</option>
+										
 									<c:forEach var="cat" items="${requestScope['categories']}">
-												<option value="${cat.noCategorie }">${cat.libelle}</option>
+										<option value="${cat.noCategorie }">${cat.libelle}</option>
 									</c:forEach>
 								</select>
 							</div>

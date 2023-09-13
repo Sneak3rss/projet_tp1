@@ -17,25 +17,16 @@ public class Utilisateur {
      private String ville;
      private String motDePasse;
      private int credit;
-     public static String typeString;
 	private String administrateur;
      
-     private Enchere enchere;
+     private List<Enchere> encheres;
      private List<ArticleVendu> articlesVendus = new ArrayList<>();
-     @Override
- 	public String toString() {
- 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
- 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
- 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
- 				+ ", administrateur=" + administrateur + ", enchere=" + enchere + ", articlesVendus=" + articlesVendus
- 				+ "]";
- 	}
+   
   
      // CONSTRUCTEURS
      public Utilisateur() {
     	
      }
-     public static String type= "laptop";
 
      static void calcule(int a, int b) {
     	 System.out.println("calcule :"+ a +b);
@@ -46,7 +37,7 @@ public class Utilisateur {
      
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
              String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur,
-            Enchere enchere, List<ArticleVendu> articlesVendus) {
+            List<Enchere> encheres, List<ArticleVendu> articlesVendus) {
          super();
          this.noUtilisateur = noUtilisateur;
          this.pseudo = pseudo;
@@ -60,7 +51,7 @@ public class Utilisateur {
          this.motDePasse = motDePasse;
          this.credit = credit;
          this.administrateur = administrateur;
-         this.enchere= enchere;
+         this.encheres= encheres;
          this.articlesVendus= articlesVendus;
          
      }
@@ -84,6 +75,8 @@ public class Utilisateur {
          this.credit = credit;
          this.administrateur = administrateur;
          this.articlesVendus= articlesVendus;
+         this.encheres= new ArrayList<Enchere>();
+
 
      }
      public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
@@ -101,6 +94,7 @@ public class Utilisateur {
          this.ville = ville;
          this.motDePasse = motDePasse;
          this.credit = credit;
+         this.encheres= new ArrayList<Enchere>();
       
      }
    
@@ -208,12 +202,12 @@ public class Utilisateur {
          this.administrateur = administrateur;
      }
 
-     public Enchere getEnchere() {
-         return enchere;
+     public List<Enchere> getEncheres() {
+         return encheres;
      }
 
-     public void setEnchere(Enchere enchere) {
-         this.enchere = enchere;
+     public void setEnchere(List<Enchere> enchereS) {
+         this.encheres = enchereS;
      }
 
      public List<ArticleVendu> getArticleVendu() {

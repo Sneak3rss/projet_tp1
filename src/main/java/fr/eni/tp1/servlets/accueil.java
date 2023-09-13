@@ -46,7 +46,13 @@ public class accueil extends HttpServlet {
 
 		if (request.getParameter("categorie") != null) {
 			int categoriId= Integer.parseInt(request.getParameter("categorie"));
+			if (categoriId == 0) {
+			articleVendus= ArticleVenduManager.getInstance().selectAll();
+			}
+			else {
 			articleVendus = ArticleVenduManager.getInstance().selectCetagorieAll(categoriId);
+
+			}
 			request.setAttribute("articles", articleVendus);
 			request.setAttribute("categories", categories);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
@@ -76,9 +82,8 @@ public class accueil extends HttpServlet {
 			ArticleVendu articleVendu = ArticleVenduManager.getInstance().selectById(articleNo);
 			
 			int dateControl= articleVendu.getDateFinencheres().getDayOfYear()- LocalDate.now().getDayOfYear();
-			int debutDateControl= Period.between(articleVendu.getDateDebutencheres(), LocalDate.now()).getDays();
-			System.out.println( " date fin control " + dateControl);
-			System.out.println( " date debut control " + debutDateControl);
+			int debutDateControl= articleVendu.getDateDebutencheres().getDayOfYear()- LocalDate.now().getDayOfYear();
+			
 
 			request.setAttribute("dateControl", dateControl);
 			request.setAttribute("debutDateControl", debutDateControl);

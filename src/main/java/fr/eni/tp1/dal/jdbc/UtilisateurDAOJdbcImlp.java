@@ -11,6 +11,7 @@ import java.util.List;
 import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.bo.Utilisateur;
 import fr.eni.tp1.dal.dao.ConnectionProvider;
+import fr.eni.tp1.dal.dao.DAOFactory;
 import fr.eni.tp1.dal.dao.DAOUtilisateur;
 
 public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
@@ -86,7 +87,7 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 				String mot_de_passe = rstSet.getString("mot_de_passe");
 				int credit = rstSet.getInt("credit");
 				String administrateur = rstSet.getString("administrateur");
-
+				
 				this.utilisateur = new Utilisateur(no_utilisateur, pseudoUti, nom, prenom, email, telephone, rue, code_postal, ville, motDePas, credit, administrateur, null);
 			}
 
