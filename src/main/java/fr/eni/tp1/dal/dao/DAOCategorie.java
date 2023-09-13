@@ -12,5 +12,8 @@ public interface DAOCategorie {
 	
 	//READ
 	List<Categorie> selectAll();
+	void insert(Categorie categorie);
+	void suprimer(int idCat);
+	void update(Categorie ct);
 	
 }

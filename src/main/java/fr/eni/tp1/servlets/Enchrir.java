@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 
 import fr.eni.tp1.bll.ArticleVenduManager;
 import fr.eni.tp1.bll.EnchrirManager;
@@ -35,6 +36,7 @@ public class Enchrir extends HttpServlet {
 		Enchere enchrir= new Enchere(utilisateurId, articleId, LocalDate.now(), prixOffre);
 
 		ArticleVendu articleVendu=	ArticleVenduManager.getInstance().selectById(articleId);
+	
 
 		int credit=	(int) session.getAttribute("credit");
 		

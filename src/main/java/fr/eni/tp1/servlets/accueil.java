@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.awt.RenderingHints.Key;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import fr.eni.tp1.bll.ArticleVenduManager;
@@ -72,6 +74,15 @@ public class accueil extends HttpServlet {
 			int articleNo = Integer.parseInt(articleNoString);
 
 			ArticleVendu articleVendu = ArticleVenduManager.getInstance().selectById(articleNo);
+			
+			int dateControl= articleVendu.getDateFinencheres().getDayOfYear()- LocalDate.now().getDayOfYear();
+			int debutDateControl= Period.between(articleVendu.getDateDebutencheres(), LocalDate.now()).getDays();
+			System.out.println( " date fin control " + dateControl);
+			System.out.println( " date debut control " + debutDateControl);
+
+			request.setAttribute("dateControl", dateControl);
+			request.setAttribute("debutDateControl", debutDateControl);
+			
 			int montant = 0;
 			if (articleVendu.getEncheres().isEmpty()) {
 				request.setAttribute("articleVendu", articleVendu);
