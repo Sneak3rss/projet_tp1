@@ -41,7 +41,24 @@
 			</div>
 			<div class="col-md-6">
 				<div class="row">
-					<div class="form-group row">
+				<div class="form-group row justify-content-center">
+					<c:choose>
+						<c:when test="${controlUtilisateurEnchres }">
+								<label class="col-sm-9 col-form-label ">
+								<h4> Vous avez remporté la vente</h4>	
+								</label>
+						</c:when>
+						<c:otherwise>
+								<label class="col-sm-9 col-form-label">
+								<h4>${ utilisateurNom } a remporté la vente</h4>	
+			
+								</label>
+						
+						</c:otherwise>
+					</c:choose>
+					</div>
+					
+					<div class="form-group row mt-3">
 						<label class="col-sm-3 col-form-label">Article :</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control-plaintext" readonly
@@ -56,15 +73,7 @@
 								value="${articleVendu.descrition}">
 						</div>
 					</div>
-					<div class="form-group row mt-3">
-						<label class="col-sm-3 col-form-label">Categorie :</label>
-						<div class="col-sm-8">
-							<input name="categorie" class="form-control-plaintext"
-								value="${articleVendu.categorie.libelle}" readonly>
-
-						</div>
-
-					</div>
+					
 					<div class="form-group row mt-3">
 						<label class="col-sm-3 col-form-label">Meuillere Offre :</label>
 						<div class="col-sm-8">
@@ -89,14 +98,7 @@
 						</div>
 					</div>
 
-					<div class="form-group row mt-3">
-						<label class="col-sm-4 col-form-label">Début de l'enchére
-							:</label>
-						<div class="col-sm-7">
-							<input type="date" class="form-control-plaintext" readonly
-								value="${articleVendu.dateDebutencheres}">
-						</div>
-					</div>
+				
 
 					<div class="form-group row mt-3">
 						<label class="col-sm-4 col-form-label">Fin de l'enchere :</label>
@@ -127,44 +129,25 @@
 				</div>
 
 				<div class="form-group row mt-3">
-					<label class="col-sm-4 col-form-label">Ma propositon :</label>
-
 					<div class="col-sm-7">
-						<form action="Enchrir" method="post">
-							<input type="number" class="form-control" name="offre"
-								value="${articleVendu.miseAPrix}"> <input type="hidden"
-								name="articleId" value="${articleVendu.noarticle }"> <input
-								type="hidden" name="utilisateurId" value="${utilisateurId}">
-
-							<c:choose>
-								<c:when
-									test="${utilisateurId != articleVendu.utilisateur.noUtilisateur}">
+						<form action="UtilisateurCredit" method="post">
 									<c:choose>
-										<c:when test="${debutDateControl>0}">
-											<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
-											<div class="alert alert-warning mt-3" role="alert">
-											Cette vente aux enchères débutera dans ${dateControl} jours .</div>
-										</c:when>
-										<c:otherwise>
-											<button type="submit" class="btn btn-warning mt-3">Enchérir</button>
+						<c:when test="${controlUtilisateurEnchres }">
+							<a href="accueil" class="btn btn-success">Back</a>
 
-										</c:otherwise>
-
-									</c:choose>
-
-								</c:when>
-								<c:otherwise>
-									<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
-
-								</c:otherwise>
-							</c:choose>
-
+						</c:when>
+						<c:otherwise>
+						
 							<c:choose>
-								<c:when test="${not empty message }">
-									<div class="mt-3 text-danger">${message}</div>
+								<c:when test="${controlUtilisateurVendor && !etatVente }">
+								<button type="submit" class="btn btn-success" value="${enchereMontant }" name= "retrait"> Retrait effectué</button>
+								<input class="d-none" name="articId" value="${articleVendu.noarticle }">
 								</c:when>
+								
 							</c:choose>
-
+		
+						</c:otherwise>
+					</c:choose>
 						</form>
 					</div>
 				</div>

@@ -1,17 +1,12 @@
 package fr.eni.tp1.dal.jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.List;
-
-import fr.eni.tp1.bo.ArticleVendu;
 import fr.eni.tp1.bo.Utilisateur;
 import fr.eni.tp1.dal.dao.ConnectionProvider;
-import fr.eni.tp1.dal.dao.DAOFactory;
 import fr.eni.tp1.dal.dao.DAOUtilisateur;
 
 public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
@@ -39,6 +34,15 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 			UPDATE UTILISATEURS SET credit=?
 			WHERE no_utilisateur = ?
 			""";
+
+	private final static String DELETE_UTILISATEUR = """
+			DELETE FROM UTILISATEURS WHERE no_utilisateur=?
+			
+			""";
+	
+	
+	
+	
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -175,8 +179,41 @@ public class UtilisateurDAOJdbcImlp implements DAOUtilisateur {
 
 	@Override
 	public void delete(int noUtilisateur) {
-
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+			pStmt.setInt(1,utilisateur.getNoUtilisateur());
+			pStmt.executeUpdate();
+			
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		
 	}
 	
-
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

@@ -11,9 +11,7 @@
     <url-pattern>/PageConnexion</url-pattern>
   </servlet-mapping>
   <display-name>projet_tp1</display-name>
-  <welcome-file-list>
-    <welcome-file>/WEB-INF/accueil.jsp</welcome-file>
-  </welcome-file-list>
+ 
   <servlet>
     <description></description>
     <display-name>accueil</display-name>
@@ -22,7 +20,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>accueil</servlet-name>
-    <url-pattern>/accueil</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -54,14 +52,24 @@
     <servlet-name>Profil</servlet-name>
     <url-pattern>/Profil</url-pattern>
   </servlet-mapping>
-    <servlet>
-    <description></description> 
+  <servlet>
+    <description></description>
     <display-name>Enchrir</display-name>
     <servlet-name>Enchrir</servlet-name>
     <servlet-class>fr.eni.tp1.servlets.Enchrir</servlet-class>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Enchrir</servlet-name>
     <url-pattern>/Enchrir</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtilisateurCredit</display-name>
+    <servlet-name>UtilisateurCredit</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.UtilisateurCredit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtilisateurCredit</servlet-name>
+    <url-pattern>/UtilisateurCredit</url-pattern>
   </servlet-mapping>
 </web-app>

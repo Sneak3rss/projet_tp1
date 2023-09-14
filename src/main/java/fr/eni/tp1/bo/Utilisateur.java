@@ -28,12 +28,6 @@ public class Utilisateur {
     	
      }
 
-     static void calcule(int a, int b) {
-    	 System.out.println("calcule :"+ a +b);
-     }
-    public void calcule1(int a, int b) {
-    	 System.out.println("calcule :"+ a +b);
-     }
      
      public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
              String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur,

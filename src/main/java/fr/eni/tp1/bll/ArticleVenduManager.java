@@ -45,4 +45,23 @@ public class ArticleVenduManager {
     	 
     	 return DAOFactory.getDAOArticleVendu().selectCetagorieAll(categorieId);
      }
+     public List<ArticleVendu> selectAllEnchereOuverts(){
+    	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuverts();
+     }
+     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurId(int id){
+    	 
+    	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuvertsUtilisateurId(id);
+
+     }
+     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int id){
+    	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuvertsUtilisateurGagne(id);
+
+     }
+     
+     public void updateEtatVenteAticle(String etatVente,int articId) {
+    	 
+    	 DAOFactory.getDAOArticleVendu().updateEtatVenteAticle(etatVente, articId);
+     }
+     
+     
 }

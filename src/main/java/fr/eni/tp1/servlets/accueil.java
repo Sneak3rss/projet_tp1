@@ -25,15 +25,19 @@ public class accueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	List<ArticleVendu> articleVendus;
 	List<Categorie> categories;
+
 	public accueil() {
 		super();
 	}
-
+	@Override
+	public void init() throws ServletException {
+		articleVendus = ArticleVenduManager.getInstance().selectAll();
+		categories = CatalogManager.getInstance().selectAll();
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		articleVendus = ArticleVenduManager.getInstance().selectAll();
-		categories = CatalogManager.getInstance().selectAll();
 		request.setAttribute("categories", categories);
 		request.setAttribute("articles", articleVendus);
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
@@ -45,12 +49,11 @@ public class accueil extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (request.getParameter("categorie") != null) {
-			int categoriId= Integer.parseInt(request.getParameter("categorie"));
+			int categoriId = Integer.parseInt(request.getParameter("categorie"));
 			if (categoriId == 0) {
-			articleVendus= ArticleVenduManager.getInstance().selectAll();
-			}
-			else {
-			articleVendus = ArticleVenduManager.getInstance().selectCetagorieAll(categoriId);
+				articleVendus = ArticleVenduManager.getInstance().selectAll();
+			} else {
+				articleVendus = ArticleVenduManager.getInstance().selectCetagorieAll(categoriId);
 
 			}
 			request.setAttribute("articles", articleVendus);
@@ -58,7 +61,7 @@ public class accueil extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 
 		}
-		
+
 		if (request.getParameter("edit") != null) {
 
 			String articleNoString = request.getParameter("edit");
@@ -72,22 +75,21 @@ public class accueil extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/vendreArticle.jsp").forward(request, response);
 
-		} 
-		
+		}
+
 		if (request.getParameter("view") != null) {
 
 			String articleNoString = request.getParameter("view");
 			int articleNo = Integer.parseInt(articleNoString);
 
 			ArticleVendu articleVendu = ArticleVenduManager.getInstance().selectById(articleNo);
-			
-			int dateControl= articleVendu.getDateFinencheres().getDayOfYear()- LocalDate.now().getDayOfYear();
-			int debutDateControl= articleVendu.getDateDebutencheres().getDayOfYear()- LocalDate.now().getDayOfYear();
-			
+
+			int dateControl = articleVendu.getDateFinencheres().getDayOfYear() - LocalDate.now().getDayOfYear();
+			int debutDateControl = articleVendu.getDateDebutencheres().getDayOfYear() - LocalDate.now().getDayOfYear();
 
 			request.setAttribute("dateControl", dateControl);
 			request.setAttribute("debutDateControl", debutDateControl);
-			
+
 			int montant = 0;
 			if (articleVendu.getEncheres().isEmpty()) {
 				request.setAttribute("articleVendu", articleVendu);
@@ -99,7 +101,21 @@ public class accueil extends HttpServlet {
 				request.setAttribute("articleVendu", articleVendu);
 				request.setAttribute("utilisateurNom", utilisateur.getNom());
 				request.setAttribute("enchereMontant", enchere.getMontantEnchere());
-				request.getRequestDispatcher("/WEB-INF/vendreArticleView.jsp").forward(request, response);
+				if (dateControl < 0) {
+					boolean controlUtilisateurEnchres = enchere
+							.getNoUtilisateur() == (int) session.getAttribute("utilisateurId");
+					boolean controlUtilisateurVendor = articleVendu.getUtilisateur()
+							.getNoUtilisateur() == (int) session.getAttribute("utilisateurId");
+					boolean etatVente= articleVendu.getEtatVente().equals("RE");
+					
+					request.setAttribute("controlUtilisateurEnchres", controlUtilisateurEnchres);
+					request.setAttribute("controlUtilisateurVendor", controlUtilisateurVendor);
+					request.setAttribute("etatVente", etatVente);
+					request.getRequestDispatcher("/WEB-INF/vendreArticleFinEnchere.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("/WEB-INF/vendreArticleView.jsp").forward(request, response);
+
+				}
 
 			}
 

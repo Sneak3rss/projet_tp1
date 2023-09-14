@@ -39,7 +39,7 @@
 								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
 								<li><a href="VendreArticle" class="nav-link px-2">Vendre
 										un Article</a></li>
-								
+
 								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
 
 							</ul>
@@ -50,30 +50,31 @@
 
 					<div class="col-md-3 text-end">
 						<div class="row justify-content-center align-items-center">
-							<button type="button" class="col-5 btn btn-success"
-										> Credit : ${credit}</button>
-						<form  class="col-5" action="accueil" method="post">
-							<button type="submit" class="btn btn-primary" value="0"
-								name="deconnexion">Déconnexion</button>
-						</form>
+							<button type="button" class="col-5 btn btn-success">
+								Credit : ${credit}</button>
+							<form class="col-5" action="accueil" method="post">
+								<button type="submit" class="btn btn-primary" value="0"
+									name="deconnexion">Déconnexion</button>
+							</form>
 						</div>
-						
+
 					</div>
 				</c:when>
 				<c:otherwise>
 
 					<c:choose>
 						<c:when test="${utilisateurId > 0 }">
-						
+
 							<ul
 								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
-								<li><a href="VendreArticle" class="nav-link px-2">Vendre un Article</a></li>
+								<li><a href="VendreArticle" class="nav-link px-2">Vendre
+										un Article</a></li>
 								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
 
 							</ul>
 							<div class="col-md-3 text-end">
-							
+
 								<form action="accueil" method="post">
 									<button type="submit" class="btn btn-primary" value="0"
 										name="deconnexion">Déconnexion</button>
@@ -110,9 +111,9 @@
 							placeholder="Search" aria-label="Search">
 
 					</div>
-					
+
 					<div class="row align-items-center mb-3">
-					
+
 						<div class="col-md-2">
 							<div class="form-floating">
 								<span>Categories :</span>
@@ -121,22 +122,86 @@
 						<div class="col-md-5">
 							<div class="col-md-4">
 								<select name="categorie" class="form-select "
-											aria-label="Default select example">
-										<option value="0">Toutes</option>
-										
+									aria-label="Default select example">
+									<option value="0">Toutes</option>
+
 									<c:forEach var="cat" items="${requestScope['categories']}">
 										<option value="${cat.noCategorie }">${cat.libelle}</option>
 									</c:forEach>
 								</select>
 							</div>
 
+
 						</div>
-						<button class="btn btn-outline-success col-md-3 " type="submit">Search</button>
-						
+
+
 					</div>
-			
-			</form>
-			
+
+
+					<c:choose>
+						<c:when test="${utilisateurId > 0 }">
+							<div class="radios-checks">
+								<%--------------------------    RADIO ACHATS                  --------------------------%>
+								<div class="row align-items-center mt-3">
+									<div class="col-md-3">
+										<div class="achat">
+											<p>
+												<input type="radio" id="achat" name="radio"
+													value="radioAchat"> <label for="achat">Achats</label><br>
+
+												<input type="checkbox" id="enchereOuvert"
+													name="check-enchereOuvert" value="enchereOuvert"
+													class="checkbox" /> <label for="enchereOuvert">enchere
+													ouverte</label><br> <input type="checkbox" id="enchereEnCours"
+													name="check-enchereEnCours" value="enchereEnCours"
+													class="checkbox" /> <label for="enchereEnCours">mes
+													enchere en cours</label><br> <input type="checkbox"
+													id="enchereRemporte" name="check-enchereRemporte"
+													value="enchereRemporte" class="checkbox" /> <label
+													for="enchereRemporte">mes encheres remportes</label>
+											</p>
+										</div>
+									</div>
+
+									<%--------------------------    RADIO VENTES                  --------------------------%>
+									<div class="col-md-3">
+										<div class="ventes">
+											<p>
+												<input type="radio" id="vente" name="radio"
+													value="radioVente" /> <label for="vente">Mes ventes</label><br>
+
+												<input type="checkbox" id="venteEnCours"
+													name="check-venteEnCours" value="venteEnCours"
+													class="checkbox" /> <label for="venteEnCours">mes
+													ventes en cours</label><br> <input type="checkbox"
+													id="venteNonDebute" name="check-venteNonDebute"
+													value="venteNonDebute" class="checkbox" /> <label
+													for="venteNonDebute">ventes non debutes</label><br> <input
+													type="checkbox" id="venteTermine" name="check-venteTermine"
+													value="venteTermine" class="checkbox" /> <label
+													for="venteTermine">ventes termines</label> <input
+													type="hidden" name="idUtilisateur"
+													value="${utilisateur.id}" />
+											</p>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<button class="btn btn-outline-success col-md-6" type="submit">Search</button>
+
+									</div>
+
+								</div>
+
+
+							</div>
+
+						</c:when>
+					</c:choose>
+
+
+				</form>
+
 			</div>
 		</div>
 		<div class="album py-5 bg-body-tertiary">
@@ -159,7 +224,9 @@
 										<li>Aticle Nom : ${article.nomArticle}</li>
 										<li>Prix : ${article.miseAPrix}</li>
 										<li>Fin de L'enchére : ${article.dateFinencheres}</li>
-										<li>Vendor :<a href="/projet_tp1/Profil?utId=${article.utilisateur.noUtilisateur}">${article.utilisateur.nom}</a> </li>
+										<li>Vendor :<a
+											href="/projet_tp1/Profil?utId=${article.utilisateur.noUtilisateur}">${article.utilisateur.nom}</a>
+										</li>
 									</ul>
 									<div class="d-flex justify-content-center align-items-center">
 										<div class="btn-group">
@@ -168,21 +235,20 @@
 												<button type="submit"
 													class="btn btn-sm btn-outline-secondary" name="view"
 													value="${article.noarticle}">View</button>
-													
+
 											</form>
-												<c:choose>
-													<c:when
-														test="${article.utilisateur.noUtilisateur == utilisateurId }">
-														<form action="accueil" method="post">
+											<c:choose>
+												<c:when
+													test="${article.utilisateur.noUtilisateur == utilisateurId }">
+													<form action="accueil" method="post">
 
+														<button type="submit"
+															class="btn btn-sm btn-outline-secondary" name="edit"
+															value="${article.noarticle}">Edit</button>
 
-															<button type="submit"
-																class="btn btn-sm btn-outline-secondary" name="edit"
-																value="${article.noarticle}">Edit</button>
-
-														</form>
-													</c:when>
-												</c:choose>
+													</form>
+												</c:when>
+											</c:choose>
 										</div>
 									</div>
 								</div>
@@ -197,5 +263,87 @@
 		</div>
 
 	</div>
+	<script async
+		src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js"
+		crossorigin="anonymous"></script>
+
+	<script type="application/javascript">
+		
+    window.onload = function() {
+        var radioAchat = document.getElementById("achat");
+        var enchereOuvert = document.getElementById("enchereOuvert");
+        var enchereEnCours = document.getElementById("enchereEnCours");
+        var enchereRemporte = document.getElementById("enchereRemporte");
+
+        var radioVente = document.getElementById("vente");
+        var venteEnCours = document.getElementById("venteEnCours");
+        var venteNonDebute = document.getElementById("venteNonDebute");
+        var venteTermine = document.getElementById("venteTermine");
+
+        radioAchat.checked = false;
+        radioVente.checked = false;
+		
+
+        radioAchat.onclick = achatClickHandler;
+        radioVente.onclick = venteClickHandler;
+		var no = 0;
+		var no1 = 0;
+
+        function achatClickHandler() {
+
+			if(  no>0 ){
+		
+				radioAchat.checked = false;
+				 no--;
+
+			}
+			else
+			{
+				radioAchat.checked = true;
+	            no++;
+			}
+		
+            venteEnCours.disabled = true;
+            venteNonDebute.disabled = true;
+            venteTermine.disabled = true;
+
+            enchereOuvert.checked = true;
+            radioVente.checked = false;
+
+            enchereOuvert.disabled = false;
+            enchereEnCours.disabled = false;
+            enchereRemporte.disabled = false;
+            
+        }
+
+        function venteClickHandler() {
+
+        	if(  no1>0 ){
+    
+            	radioVente.checked = false;
+            	no1--;
+ 
+			}
+			else
+			{
+			
+				radioVente.checked = true;
+				no1++;
+	
+			}
+        	
+            enchereOuvert.disabled = true;
+            enchereEnCours.disabled = true;
+            enchereRemporte.disabled = true;
+
+            radioAchat.checked = false;
+
+            venteEnCours.disabled = false;
+            venteNonDebute.disabled = false;
+            venteTermine.disabled = false;
+        }
+    }
+
+	</script>
 </body>
 </html>

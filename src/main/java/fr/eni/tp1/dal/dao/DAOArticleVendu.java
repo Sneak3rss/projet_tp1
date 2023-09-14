@@ -20,6 +20,7 @@ public interface DAOArticleVendu {
     
     // UPDATE
     void update (ArticleVendu articleVendu) ;
+    public void updateEtatVenteAticle(String etatVente,int articId);
     
     // DELETE
     void delete (int noarticle) ;
@@ -27,7 +28,7 @@ public interface DAOArticleVendu {
     
     public List<ArticleVendu> selectAllEnchereOuverts();
     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurId(int id);
-    public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne();
+    public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int id);
 
 
 }
