@@ -78,7 +78,7 @@
 					<span><strong> Filters :</strong></span>
 					<div class="col-md-4 mb-3">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search" name="search">
+							placeholder="Search" aria-label="Search" name="search" >
 					</div>
 					<div class="row align-items-center mb-3">
 						<div class="col-md-2">
