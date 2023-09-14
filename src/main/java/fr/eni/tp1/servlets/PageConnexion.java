@@ -43,8 +43,8 @@ public class PageConnexion extends HttpServlet {
 		else {
 			session.setAttribute("utilisateurId", utilisateur.getNoUtilisateur());
 			session.setAttribute("credit", utilisateur.getCredit());
+			session.setAttribute("admin", utilisateur.getAdministrateur());
 			List<ArticleVendu> articleVendus= ArticleVenduManager.getInstance().selectAll();
-			
 			request.setAttribute("articles", articleVendus);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		}

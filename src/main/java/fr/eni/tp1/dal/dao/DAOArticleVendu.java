@@ -29,6 +29,6 @@ public interface DAOArticleVendu {
     public List<ArticleVendu> selectAllEnchereOuverts();
     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurId(int id);
     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int id);
-
+    public List<ArticleVendu> selectSearchAll(String search);
 
 }

@@ -17,8 +17,6 @@
 
 	<div class="container">
 
-
-
 		<header
 			class="d-flex flex-wrap 	align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 			<div class="col-md-3 mb-2 mb-md-0">
@@ -32,21 +30,21 @@
 			<c:choose>
 				<c:when test="${utilisateurId>0}">
 
-					<c:choose>
-						<c:when test="${utilisateurId > 0 }">
-							<ul
-								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
-								<li><a href="VendreArticle" class="nav-link px-2">Vendre
-										un Article</a></li>
 
-								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
+					<ul
+						class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+								<c:choose>
+									<c:when test="${admin>0}">
+									<li><a href="Admin" class="nav-link px-2 link-secondary">Admin</a></li>	
+									</c:when>
+								</c:choose>
+						<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
+						<li><a href="VendreArticle" class="nav-link px-2">Vendre
+								un Article</a></li>
 
-							</ul>
+						<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
 
-						</c:when>
-					</c:choose>
-
+					</ul>
 
 					<div class="col-md-3 text-end">
 						<div class="row justify-content-center align-items-center">
@@ -62,58 +60,27 @@
 				</c:when>
 				<c:otherwise>
 
-					<c:choose>
-						<c:when test="${utilisateurId > 0 }">
+					<h3 class="nav col-12 col-md-auto mb-2 mb-md-0">ENI-Encheres</h3>
 
-							<ul
-								class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-								<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
-								<li><a href="VendreArticle" class="nav-link px-2">Vendre
-										un Article</a></li>
-								<li><a href="Profil" class="nav-link px-2">Mon Profil</a></li>
-
-							</ul>
-							<div class="col-md-3 text-end">
-
-								<form action="accueil" method="post">
-									<button type="submit" class="btn btn-primary" value="0"
-										name="deconnexion">Déconnexion</button>
-								</form>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<h3 class="nav col-12 col-md-auto mb-2 mb-md-0">ENI-Encheres</h3>
-
-							<div class="col-md-3 text-end">
-								<a href="PageConnexion" class="nav-link px-2">S'incrire-Se
-									connecter</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<div class="col-md-3 text-end">
+						<a href="PageConnexion" class="nav-link px-2">S'incrire-Se
+							connecter</a>
+					</div>
 
 				</c:otherwise>
 			</c:choose>
 
 		</header>
 
-
-
 		<div class="container">
-
-			<div class="row g-3 mb-3 align-items-center ">
-				<form action="accueil" method="post">
-
-					<span><strong> Filters :</strong> </span>
-
+			<div class="row g-3 mb-3 align-items-center">
+				<form action="SearchEnchere" method="post">
+					<span><strong> Filters :</strong></span>
 					<div class="col-md-4 mb-3">
-
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-
+							placeholder="Search" aria-label="Search" name="search">
 					</div>
-
 					<div class="row align-items-center mb-3">
-
 						<div class="col-md-2">
 							<div class="form-floating">
 								<span>Categories :</span>
@@ -121,89 +88,73 @@
 						</div>
 						<div class="col-md-5">
 							<div class="col-md-4">
-								<select name="categorie" class="form-select "
+								<select name="categorie" class="form-select"
 									aria-label="Default select example">
 									<option value="0">Toutes</option>
-
 									<c:forEach var="cat" items="${requestScope['categories']}">
 										<option value="${cat.noCategorie }">${cat.libelle}</option>
 									</c:forEach>
 								</select>
 							</div>
-
-
 						</div>
-
-
 					</div>
-
-
 					<c:choose>
 						<c:when test="${utilisateurId > 0 }">
 							<div class="radios-checks">
-								<%--------------------------    RADIO ACHATS                  --------------------------%>
+								<!-- Radio ACHATS -->
 								<div class="row align-items-center mt-3">
 									<div class="col-md-3">
 										<div class="achat">
 											<p>
 												<input type="radio" id="achat" name="radio"
 													value="radioAchat"> <label for="achat">Achats</label><br>
-
 												<input type="checkbox" id="enchereOuvert"
 													name="check-enchereOuvert" value="enchereOuvert"
-													class="checkbox" /> <label for="enchereOuvert">enchere
+													class="checkbox"> <label for="enchereOuvert">enchere
 													ouverte</label><br> <input type="checkbox" id="enchereEnCours"
 													name="check-enchereEnCours" value="enchereEnCours"
-													class="checkbox" /> <label for="enchereEnCours">mes
+													class="checkbox"> <label for="enchereEnCours">mes
 													enchere en cours</label><br> <input type="checkbox"
 													id="enchereRemporte" name="check-enchereRemporte"
-													value="enchereRemporte" class="checkbox" /> <label
+													value="enchereRemporte" class="checkbox"> <label
 													for="enchereRemporte">mes encheres remportes</label>
 											</p>
 										</div>
 									</div>
-
-									<%--------------------------    RADIO VENTES                  --------------------------%>
+									<!-- Radio VENTES -->
 									<div class="col-md-3">
 										<div class="ventes">
 											<p>
 												<input type="radio" id="vente" name="radio"
-													value="radioVente" /> <label for="vente">Mes ventes</label><br>
-
-												<input type="checkbox" id="venteEnCours"
+													value="radioVente"> <label for="vente">Mes
+													ventes</label><br> <input type="checkbox" id="venteEnCours"
 													name="check-venteEnCours" value="venteEnCours"
-													class="checkbox" /> <label for="venteEnCours">mes
+													class="checkbox"> <label for="venteEnCours">mes
 													ventes en cours</label><br> <input type="checkbox"
 													id="venteNonDebute" name="check-venteNonDebute"
-													value="venteNonDebute" class="checkbox" /> <label
+													value="venteNonDebute" class="checkbox"> <label
 													for="venteNonDebute">ventes non debutes</label><br> <input
 													type="checkbox" id="venteTermine" name="check-venteTermine"
-													value="venteTermine" class="checkbox" /> <label
+													value="venteTermine" class="checkbox"> <label
 													for="venteTermine">ventes termines</label> <input
 													type="hidden" name="idUtilisateur"
-													value="${utilisateur.id}" />
+													value="${utilisateur.id}">
 											</p>
 										</div>
 									</div>
-
-									<div class="col-md-6">
-										<button class="btn btn-outline-success col-md-6" type="submit">Search</button>
-
-									</div>
-
 								</div>
-
-
 							</div>
-
 						</c:when>
 					</c:choose>
-
-
+					<!-- Move the button to the right -->
+					<div class="col-md-6 offset-md-2">
+						<button class="btn btn-outline-success col-md-6 float-end"
+							type="submit">Search</button>
+					</div>
 				</form>
-
 			</div>
 		</div>
+
 		<div class="album py-5 bg-body-tertiary">
 
 			<div class="container">
@@ -268,6 +219,11 @@
 		crossorigin="anonymous"></script>
 
 	<script type="application/javascript">
+		
+		
+		
+		
+		
 		
     window.onload = function() {
         var radioAchat = document.getElementById("achat");
@@ -344,6 +300,11 @@
         }
     }
 
+	
+	
+	
+	
+	
 	</script>
 </body>
 </html>

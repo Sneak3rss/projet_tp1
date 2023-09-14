@@ -29,15 +29,16 @@ public class accueil extends HttpServlet {
 	public accueil() {
 		super();
 	}
+
 	@Override
 	public void init() throws ServletException {
-		articleVendus = ArticleVenduManager.getInstance().selectAll();
-		categories = CatalogManager.getInstance().selectAll();
+		
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		articleVendus = ArticleVenduManager.getInstance().selectAll();
+		categories = CatalogManager.getInstance().selectAll();
 		request.setAttribute("categories", categories);
 		request.setAttribute("articles", articleVendus);
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
@@ -47,20 +48,6 @@ public class accueil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
-		if (request.getParameter("categorie") != null) {
-			int categoriId = Integer.parseInt(request.getParameter("categorie"));
-			if (categoriId == 0) {
-				articleVendus = ArticleVenduManager.getInstance().selectAll();
-			} else {
-				articleVendus = ArticleVenduManager.getInstance().selectCetagorieAll(categoriId);
-
-			}
-			request.setAttribute("articles", articleVendus);
-			request.setAttribute("categories", categories);
-			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-
-		}
 
 		if (request.getParameter("edit") != null) {
 
@@ -101,13 +88,13 @@ public class accueil extends HttpServlet {
 				request.setAttribute("articleVendu", articleVendu);
 				request.setAttribute("utilisateurNom", utilisateur.getNom());
 				request.setAttribute("enchereMontant", enchere.getMontantEnchere());
-				if (dateControl < 0) {
+				if (dateControl <= 0) {
 					boolean controlUtilisateurEnchres = enchere
 							.getNoUtilisateur() == (int) session.getAttribute("utilisateurId");
 					boolean controlUtilisateurVendor = articleVendu.getUtilisateur()
 							.getNoUtilisateur() == (int) session.getAttribute("utilisateurId");
-					boolean etatVente= articleVendu.getEtatVente().equals("RE");
-					
+					boolean etatVente = articleVendu.getEtatVente().equals("RE");
+
 					request.setAttribute("controlUtilisateurEnchres", controlUtilisateurEnchres);
 					request.setAttribute("controlUtilisateurVendor", controlUtilisateurVendor);
 					request.setAttribute("etatVente", etatVente);

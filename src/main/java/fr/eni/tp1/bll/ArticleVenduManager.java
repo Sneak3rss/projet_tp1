@@ -62,6 +62,10 @@ public class ArticleVenduManager {
     	 
     	 DAOFactory.getDAOArticleVendu().updateEtatVenteAticle(etatVente, articId);
      }
+     public List<ArticleVendu> selectSearchAll(String search){
+    	 
+    	return  DAOFactory.getDAOArticleVendu().selectSearchAll(search);
+     }
      
      
 }

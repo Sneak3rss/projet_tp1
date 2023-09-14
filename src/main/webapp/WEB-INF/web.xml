@@ -11,7 +11,6 @@
     <url-pattern>/PageConnexion</url-pattern>
   </servlet-mapping>
   <display-name>projet_tp1</display-name>
- 
   <servlet>
     <description></description>
     <display-name>accueil</display-name>
@@ -71,5 +70,25 @@
   <servlet-mapping>
     <servlet-name>UtilisateurCredit</servlet-name>
     <url-pattern>/UtilisateurCredit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchEnchere</display-name>
+    <servlet-name>SearchEnchere</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.SearchEnchere</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchEnchere</servlet-name>
+    <url-pattern>/SearchEnchere</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Admin</display-name>
+    <servlet-name>Admin</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Admin</servlet-name>
+    <url-pattern>/Admin</url-pattern>
   </servlet-mapping>
 </web-app>

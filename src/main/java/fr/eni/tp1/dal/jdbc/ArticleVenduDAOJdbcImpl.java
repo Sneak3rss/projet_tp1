@@ -70,6 +70,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			   WHERE CATEGORIES.no_categorie=?
 			   ORDER BY ARTICLES_VENDUS.no_article;
 			   """;
+	private final static String SELECT_SEARCH = """
+			   SELECT * FROM ARTICLES_VENDUS
+		   INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie
+		   INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur
+		   WHERE ARTICLES_VENDUS.nom_article LIKE  CONCAT( '%',?,'%')
+		   ORDER BY ARTICLES_VENDUS.no_article;
+		   """;
 
 	private final static String SELECT_BY_ID = """
 
@@ -241,7 +248,43 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 
 		return articleVendus;
 	}
+	@Override
+	public List<ArticleVendu> selectSearchAll(String search) {
+		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement stmtStatement = cnx.prepareStatement(SELECT_SEARCH);
+			stmtStatement.setString(1, search);
+			ResultSet rstSet = stmtStatement.executeQuery();
+			while (rstSet.next()) {
+				int no_article = rstSet.getInt("no_article");
+				String nom_article = rstSet.getString("nom_article");
+				String description = rstSet.getString("description");
+				Date date_debut_encheres = rstSet.getDate("date_debut_encheres");
+				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
+				Double prix_initial = rstSet.getDouble("prix_initial");
+				Double prix_vente = rstSet.getDouble("prix_initial");
+				String etat_vente = rstSet.getString("etat_vente");
+				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
+				String utilisateurNomString = rstSet.getString("pseudo");
 
+				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
+						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
+						etat_vente);
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNom(utilisateurNomString);
+				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
+				articleVendu.setUtilisateur(utilisateur);
+				articleVendus.add(articleVendu);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return articleVendus;
+	}
+	
 	@Override
 	public void insert(ArticleVendu article, int no_utilisateur, int no_categorie) {
 
