@@ -91,4 +91,14 @@
     <servlet-name>Admin</servlet-name>
     <url-pattern>/Admin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminRegister</display-name>
+    <servlet-name>AdminRegister</servlet-name>
+    <servlet-class>fr.eni.tp1.servlets.AdminRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminRegister</servlet-name>
+    <url-pattern>/AdminRegister</url-pattern>
+  </servlet-mapping>
 </web-app>

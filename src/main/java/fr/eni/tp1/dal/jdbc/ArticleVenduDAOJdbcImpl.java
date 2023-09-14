@@ -38,7 +38,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			     ORDER BY artic.no_article;
 			   """;
 	private final static String SELECT_ALL_MES_ENCHERES = """
-				SELECT artic.no_article, artic.prix_initial, artic.nom_article,artic.etat_vente,
+				SELECT artic.no_article, artic.prix_initial, artic.nom_article,artic.etatVente,
 			max (montant_enchere) as montant, artic.description,artic.date_debut_encheres,artic.date_fin_encheres,
 			uti.pseudo,uti.nom, uti.no_utilisateur
 			 FROM ARTICLES_VENDUS as artic
@@ -46,19 +46,19 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			INNER JOIN UTILISATEURS as uti ON artic.no_utilisateur = uti.no_utilisateur
 			INNER JOIN ENCHERES as enc ON artic.no_article = enc.no_article
 			where   enc.no_utilisateur = ?
-			group by artic.no_article, artic.nom_article,artic.prix_initial,artic.description,artic.date_debut_encheres,artic.date_fin_encheres, uti.pseudo,uti.nom, uti.no_utilisateur,artic.etat_vente
+			group by artic.no_article, artic.nom_article,artic.prix_initial,artic.description,artic.date_debut_encheres,artic.date_fin_encheres, uti.pseudo,uti.nom, uti.no_utilisateur,artic.etatVente
 			ORDER BY artic.no_article;
 			    """;
 	
 	private final static String SELECT_ALL_ENCHERES_GAGNE_ ="""
-			  SELECT artic.no_article, artic.prix_initial, 
+		  SELECT artic.no_article, artic.prix_initial, 
 			artic.description,artic.date_debut_encheres,artic.date_fin_encheres,
 			uti.pseudo,uti.nom, uti.no_utilisateur
 			FROM ARTICLES_VENDUS as artic
 			INNER JOIN CATEGORIES as cat ON artic.no_categorie = cat.no_categorie
 			INNER JOIN UTILISATEURS as uti ON artic.no_utilisateur = uti.no_utilisateur
 			INNER JOIN ENCHERES as enc ON artic.no_article = enc.no_article
-			where   DATEDIFF(day,artic.date_fin_encheres,GETDATE())>0 and (? = ( select top 1 ENCHERES.no_utilisateur from ENCHERES where ENCHERES.no_article=4 order by ENCHERES.montant_enchere desc))
+			where   DATEDIFF(day,artic.date_fin_encheres,GETDATE())>=0 and ?=(select top 1 ENCHERES.no_utilisateur from ENCHERES where ENCHERES.no_article=? order by ENCHERES.montant_enchere desc)
 			Group by artic.no_article, artic.nom_article,artic.prix_initial,artic.description,artic.date_debut_encheres,artic.date_fin_encheres, uti.pseudo,uti.nom, uti.no_utilisateur 
 			ORDER BY artic.no_article;
 			 """;
@@ -83,7 +83,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			SELECT ARTICLES_VENDUS.no_article , ARTICLES_VENDUS.nom_article ,
 			ARTICLES_VENDUS.description, ARTICLES_VENDUS.date_debut_encheres ,
 			ARTICLES_VENDUS.date_fin_encheres, ARTICLES_VENDUS.prix_initial ,
-			ARTICLES_VENDUS.prix_vente, ARTICLES_VENDUS.etat_vente,
+			ARTICLES_VENDUS.prix_vente, ARTICLES_VENDUS.etatVente,
 			UTILISATEURS.no_utilisateur,ARTICLES_VENDUS.no_categorie,
 			CATEGORIES.libelle,UTILISATEURS.pseudo,nom,RETRAITS.rue,
 			RETRAITS.code_postal,RETRAITS.ville,ENCHERES.date_enchere,
@@ -101,7 +101,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			SELECT ARTICLES_VENDUS.no_article ,ARTICLES_VENDUS.nom_article ,
 			ARTICLES_VENDUS.description, ARTICLES_VENDUS.date_debut_encheres ,
 			ARTICLES_VENDUS.date_fin_encheres, ARTICLES_VENDUS.prix_initial ,
-			ARTICLES_VENDUS.prix_vente, ARTICLES_VENDUS.etat_vente,
+			ARTICLES_VENDUS.prix_vente, ARTICLES_VENDUS.etatVente,
 			UTILISATEURS.no_utilisateur,ARTICLES_VENDUS.no_categorie,
 			CATEGORIES.libelle,UTILISATEURS.pseudo,nom,RETRAITS.rue,
 			RETRAITS.code_postal,RETRAITS.ville
@@ -114,7 +114,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 
 	private final static String INSERT_ARTICLES_VENDUS = """
 			INSERT INTO ARTICLES_VENDUS(nom_article,description, date_debut_encheres,
-			date_fin_encheres,prix_initial, prix_vente,etat_vente,no_utilisateur,no_categorie)
+			date_fin_encheres,prix_initial, prix_vente,etatVente,no_utilisateur,no_categorie)
 			VALUES (?,?,?,?,?,?,?,?,?);
 			""";
 	private final static String INSERT_RETRAIT = """
@@ -128,8 +128,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	private final static String UPDATE_RETRAIT = """
 			UPDATE RETRAITS SET rue  = ?, code_postal  = ?, ville = ? WHERE no_article = ?
 			""";
-	private final static String UPDATE_ARTICLE_ETAT_VENTE= """
-			UPDATE ARTICLES_VENDUS SET etat_vente=? WHERE no_article = ?
+	private final static String UPDATE_ARTICLE_etatVente= """
+			UPDATE ARTICLES_VENDUS SET etatVente=? WHERE no_article = ?
 			""";
 
 
@@ -154,13 +154,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 				Double prix_initial = rstSet.getDouble("prix_initial");
 				Double prix_vente = rstSet.getDouble("prix_initial");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
 				String utilisateurNomString = rstSet.getString("pseudo");
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
@@ -190,13 +190,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 				Double prix_initial = rstSet.getDouble("prix_initial");
 				Double prix_vente = rstSet.getDouble("prix_initial");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
 				String utilisateurNomString = rstSet.getString("pseudo");
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
@@ -227,13 +227,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 				Double prix_initial = rstSet.getDouble("prix_initial");
 				Double prix_vente = rstSet.getDouble("prix_initial");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
 				String utilisateurNomString = rstSet.getString("pseudo");
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
@@ -263,13 +263,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 				Double prix_initial = rstSet.getDouble("prix_initial");
 				Double prix_vente = rstSet.getDouble("prix_initial");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
 				String utilisateurNomString = rstSet.getString("pseudo");
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, prix_vente,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
@@ -358,7 +358,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 					Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 					Double prix_initial = rstSet.getDouble("prix_initial");
 					Double prix_vente = rstSet.getDouble("prix_vente");
-					String etat_vente = rstSet.getString("etat_vente");
+					String etatVente = rstSet.getString("etatVente");
 					String rue = rstSet.getString("rue");
 					String codePostal = rstSet.getString("code_postal");
 					String ville = rstSet.getString("ville");
@@ -368,7 +368,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 					String utilisateurNomString = rstSet.getString("pseudo");
 
 					articleVendu = new ArticleVendu(nom_article, description, date_debut_encheres.toLocalDate(),
-							date_fin_encheres.toLocalDate(), prix_initial, prix_vente, etat_vente);
+							date_fin_encheres.toLocalDate(), prix_initial, prix_vente, etatVente);
 
 					articleVendu.setNoarticle(no_article);
 					articleVendu.setRetrait(new Retrait(no_article, rue, codePostal, ville));
@@ -390,7 +390,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 						Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 						Double prix_initial = rstSet.getDouble("prix_initial");
 						Double prix_vente = rstSet.getDouble("prix_vente");
-						String etat_vente = rstSet.getString("etat_vente");
+						String etatVente = rstSet.getString("etatVente");
 						String rue = rstSet.getString("rue");
 						String codePostal = rstSet.getString("code_postal");
 						String ville = rstSet.getString("ville");
@@ -400,7 +400,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 						String utilisateurNomString = rstSet.getString("pseudo");
 
 						articleVendu = new ArticleVendu(nom_article, description, date_debut_encheres.toLocalDate(),
-								date_fin_encheres.toLocalDate(), prix_initial, prix_vente, etat_vente);
+								date_fin_encheres.toLocalDate(), prix_initial, prix_vente, etatVente);
 
 						articleVendu.setNoarticle(no_article);
 						articleVendu.setRetrait(new Retrait(no_article, rue, codePostal, ville));
@@ -470,7 +470,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	public void updateEtatVenteAticle(String etatVente,int articId) {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_ARTICLE_ETAT_VENTE);
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_ARTICLE_etatVente);
 			pStmt.setString(1, etatVente);
 			pStmt.setInt(2, articId);
 			pStmt.executeUpdate();
@@ -496,13 +496,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				Date date_debut_encheres = rstSet.getDate("date_debut_encheres");
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
 				Double prix_initial = rstSet.getDouble("prix_initial");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
 				String utilisateurNomString = rstSet.getString("pseudo");
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, 0,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));
@@ -519,11 +519,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	}
 
 	@Override
-	public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int id) {
+	public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int utiId,int articId) {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = cnx.prepareStatement(SELECT_ALL_ENCHERES_GAGNE_);
-			pStmt.setInt(1, id);
+			pStmt.setInt(1, utiId);
+			pStmt.setInt(2, articId);
 			ResultSet rstSet = pStmt.executeQuery();
 			while (rstSet.next()) {
 				int no_article = rstSet.getInt("no_article");
@@ -531,7 +532,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 				String description = rstSet.getString("description");
 				Date date_debut_encheres = rstSet.getDate("date_debut_encheres");
 				Date date_fin_encheres = rstSet.getDate("date_fin_encheres");
-				String etat_vente = rstSet.getString("etat_vente");
+				String etatVente = rstSet.getString("etatVente");
 
 				Double prix_initial = rstSet.getDouble("prix_initial");
 				String utilisateurNoUtilisateur = rstSet.getString("no_utilisateur");
@@ -539,7 +540,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 
 				ArticleVendu articleVendu = new ArticleVendu(no_article, nom_article, description,
 						date_debut_encheres.toLocalDate(), date_fin_encheres.toLocalDate(), prix_initial, 0,
-						etat_vente);
+						etatVente);
 				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setNom(utilisateurNomString);
 				utilisateur.setNoUtilisateur(Integer.parseInt(utilisateurNoUtilisateur));

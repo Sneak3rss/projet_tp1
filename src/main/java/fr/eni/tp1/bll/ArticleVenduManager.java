@@ -53,8 +53,8 @@ public class ArticleVenduManager {
     	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuvertsUtilisateurId(id);
 
      }
-     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int id){
-    	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuvertsUtilisateurGagne(id);
+     public List<ArticleVendu> selectAllEnchereOuvertsUtilisateurGagne(int utiId,int articId){
+    	 return	 DAOFactory.getDAOArticleVendu().selectAllEnchereOuvertsUtilisateurGagne(utiId,articId);
 
      }
      

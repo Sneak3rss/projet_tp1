@@ -55,8 +55,10 @@ public class SearchEnchere extends HttpServlet {
 							System.out.println(request.getParameter("check-enchereEnCours"));
 
 						} else {
+							System.out.println(request.getParameter("check-enchereRemporte"));
+
 							articleVendus = ArticleVenduManager.getInstance()
-									.selectAllEnchereOuvertsUtilisateurGagne(id);
+									.selectAllEnchereOuvertsUtilisateurGagne(id, id);
 
 						}
 					} else if (choixRadio.equals("radioVente")) {

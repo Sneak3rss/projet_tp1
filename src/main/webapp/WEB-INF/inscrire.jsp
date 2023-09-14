@@ -17,7 +17,7 @@
 
 	<c:choose>
 		<c:when test="${not empty utilisateur }">
-			<div class="container mt-5">
+	<div class="container mt-5">
 		<h2 class="form-title">Modification Profil</h2>
 		<form action="Inscrire" method="post">
 			<div class="row">

@@ -138,7 +138,7 @@
 
 							<c:choose>
 								<c:when
-									test="${utilisateurId != articleVendu.utilisateur.noUtilisateur}">
+									test="${utilisateurId != articleVendu.utilisateur.noUtilisateur && not empty utilisateurId}">
 									<c:choose>
 										<c:when test="${debutDateControl>0}">
 											<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>

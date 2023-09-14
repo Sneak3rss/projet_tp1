@@ -17,6 +17,8 @@ public class Categorie {
 
 	    public Categorie(String libelle2) {
 			// TODO Auto-generated constructor stub
+	        this.libelle = libelle2;
+
 		}
 
 		// GETTERS ET SETTERS
