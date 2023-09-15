@@ -58,14 +58,26 @@ public class SearchEnchere extends HttpServlet {
 
 						} else {
 							articleVendus = ArticleVenduManager.getInstance().selectAllEnchereOuvertsUtilisateurId(id);
-							List<ArticleVendu> artics= new ArrayList<ArticleVendu>();
+							List<ArticleVendu> artics = new ArrayList<ArticleVendu>();
+
 							for (int i = 0; i < articleVendus.size(); i++) {
+								if (articleVendus.get(i).getEtatVente().equals("RE")) 
+								{
+								ArticleVendu artic =ArticleVenduManager.getInstance().selectAllEnchereOuvertsUtilisateurGagne(
+											articleVendus.get(i).getNoarticle(),
+											articleVendus.get(i).getNoarticle());
+								if (id == artic.getUtilisateur().getEncheres().get(0).getNoUtilisateur()) {
+									
+										artics.add(artic);
+										
+									} 
 								
-							ArticleVendu artic=	ArticleVenduManager.getInstance().selectAllEnchereOuvertsUtilisateurGagne(articleVendus.get(0).getNoarticle(),articleVendus.get(0).getNoarticle());
-							artics.add(artic);
+								}
+
 							}
-							articleVendus=artics;		
-							
+
+							articleVendus = artics;
+
 						}
 					} else if (choixRadio.equals("radioVente")) {
 

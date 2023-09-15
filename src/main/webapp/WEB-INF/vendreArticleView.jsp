@@ -140,7 +140,7 @@
 								<c:when
 									test="${utilisateurId != articleVendu.utilisateur.noUtilisateur && not empty utilisateurId}">
 									<c:choose>
-										<c:when test="${debutDateControl>0}">
+										<c:when test="${debutDateControl>=0}">
 											<button type="submit" class="btn btn-warning mt-3" disabled>Enchérir</button>
 											<div class="alert alert-warning mt-3" role="alert">
 											Cette vente aux enchères débutera dans ${dateControl} jours .</div>

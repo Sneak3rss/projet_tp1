@@ -47,7 +47,7 @@
 									<label class="col-sm-3 col-form-label">Article :</label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" placeholder="Article"
-											name="articleNom" value="${articleVendu.nomArticle}">
+											name="articleNom" value="${articleVendu.nomArticle}" >
 									</div>
 								</div>
 
@@ -55,7 +55,7 @@
 									<label class="col-sm-3 col-form-label">Description :</label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="description"
-											placeholder="Description" value="${articleVendu.descrition}">
+											placeholder="Description" value="${articleVendu.descrition}" >
 									</div>
 								</div>
 								<div class="form-group row mt-3">
@@ -76,7 +76,7 @@
 									<label class="col-sm-3 col-form-label">Mise à Prix :</label>
 									<div class="col-sm-8">
 										<input type="number" class="form-control" name="miseAPrix"
-											placeholder="Mise à Prix" value="${articleVendu.miseAPrix}">
+											placeholder="Mise à Prix" value="${articleVendu.miseAPrix}" >
 									</div>
 								</div>
 
@@ -86,7 +86,7 @@
 									<div class="col-sm-7">
 										<input type="date" class="form-control"
 											name="dateDebutencheres"
-											value="${articleVendu.dateDebutencheres}">
+											value="${articleVendu.dateDebutencheres}" >
 									</div>
 								</div>
 
@@ -95,7 +95,7 @@
 										:</label>
 									<div class="col-sm-7">
 										<input type="date" class="form-control" name="dateFinencheres"
-											value="${articleVendu.dateFinencheres}">
+											value="${articleVendu.dateFinencheres}" >
 									</div>
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 									<label class="col-sm-3 col-form-label">Rue :</label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" placeholder="Rue"
-											name="rue" value="${articleVendu.retrait.rue}">
+											name="rue" value="${articleVendu.retrait.rue}" >
 									</div>
 								</div>
 								<div class="form-group row">
@@ -115,14 +115,14 @@
 									<div class="col-sm-8">
 										<input type="text" class="form-control"
 											placeholder="CodePostal" name="codePostal"
-											value="${articleVendu.retrait.codePostal}">
+											value="${articleVendu.retrait.codePostal}" >
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Ville :</label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" placeholder="Ville"
-											name="ville" value="${articleVendu.retrait.ville}">
+											name="ville" value="${articleVendu.retrait.ville}" >
 									</div>
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 								<div class="col-3 mt-3">
 									<button type="submit" class="btn btn-warning" name="modify"  value="${articleVendu.noarticle}">Enregistrer</button>
 								</div>
-								<div class="col-3 mt-3">
+								<div class="col-4 mt-3">
 									<button type="submit" class="btn btn-danger " name="suprimer"  value="${articleVendu.noarticle}">Annuler la Vente</button>
 								</div>
 
@@ -167,7 +167,7 @@
 							<label class="col-sm-3 col-form-label">Article :</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" placeholder="Article"
-									name="articleNom">
+									name="articleNom" required>
 							</div>
 						</div>
 
@@ -175,7 +175,7 @@
 							<label class="col-sm-3 col-form-label">Description :</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="description"
-									placeholder="Description">
+									placeholder="Description" required>
 							</div>
 						</div>
 						<div class="form-group row mt-3">
@@ -194,7 +194,7 @@
 							<label class="col-sm-3 col-form-label">Mise à Prix :</label>
 							<div class="col-sm-8">
 								<input type="number" class="form-control" name="miseAPrix"
-									placeholder="Mise à Prix">
+									placeholder="Mise à Prix" required>
 							</div>
 						</div>
 
@@ -202,14 +202,14 @@
 							<label class="col-sm-4 col-form-label">Début de l'enchére
 								:</label>
 							<div class="col-sm-7">
-								<input type="date" class="form-control" name="dateDebutencheres">
+								<input type="date" class="form-control" name="dateDebutencheres" required>
 							</div>
 						</div>
 
 						<div class="form-group row mt-3">
 							<label class="col-sm-4 col-form-label">Fin de l'enchere :</label>
 							<div class="col-sm-7">
-								<input type="date" class="form-control" name="dateFinencheres">
+								<input type="date" class="form-control" name="dateFinencheres" required>
 							</div>
 						</div>
 					</div>
@@ -221,21 +221,21 @@
 							<label class="col-sm-3 col-form-label">Rue :</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" placeholder="Rue"
-									name="rue">
+									name="rue" required>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-3 col-form-label">Code Postal :</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" placeholder="CodePostal"
-									name="codePostal">
+									name="codePostal" required>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-3 col-form-label">Ville :</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" placeholder="Ville"
-									name="ville">
+									name="ville" required>
 							</div>
 						</div>
 					</div>

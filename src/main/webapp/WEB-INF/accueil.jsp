@@ -38,7 +38,6 @@
 									<li><a href="Admin" class="nav-link px-2 link-secondary">Admin</a></li>	
 									</c:when>
 								</c:choose>
-						<li><a href="#" class="nav-link px-2 link-secondary">Enhéres</a></li>
 						<li><a href="VendreArticle" class="nav-link px-2">Vendre
 								un Article</a></li>
 
@@ -114,7 +113,7 @@
 													ouverte</label><br> <input type="checkbox" id="enchereEnCours"
 													name="check-enchereEnCours" value="enchereEnCours"
 													class="checkbox"> <label for="enchereEnCours">mes
-													enchere en cours</label><br> <input type="checkbox"
+													enchere</label><br> <input type="checkbox"
 													id="enchereRemporte" name="check-enchereRemporte"
 													value="enchereRemporte" class="checkbox"> <label
 													for="enchereRemporte">mes encheres remportes</label>

@@ -128,9 +128,8 @@ style>.bd-placeholder-img {
 							class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">Categorie </a>
 						<ul class="dropdown-menu text-small" style="">
-							<li><a class="dropdown-item" href="#">ALL</a></li>
+							<li><a class="dropdown-item" href="Admin">ALL</a></li>
 							<li><a class="dropdown-item" href="AdminRegister">INSERT</a></li>
-							<li><a class="dropdown-item" href="#">UPDATE/DELETE</a></li>
 							
 						</ul>
 					</div>

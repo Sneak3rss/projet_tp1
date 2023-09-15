@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import fr.eni.tp1.bll.CatalogManager;
+import fr.eni.tp1.bo.Categorie;
+
 /**
  * Servlet implementation class AdminRegister
  */
@@ -27,8 +30,17 @@ public class AdminRegister extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String btn_modify= request.getParameter("modifyCategorie");
+		String categorieName= request.getParameter("categorie");
+
+		if (btn_modify != null) {
+		int id = Integer.parseInt(btn_modify);
+		CatalogManager.getInstance().update(new Categorie(id, categorieName));
+		
+		response.sendRedirect("/projet_tp1/Admin");
+		}
+		
+		
 	}
 
 }

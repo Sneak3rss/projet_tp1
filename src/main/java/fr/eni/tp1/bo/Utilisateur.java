@@ -23,7 +23,17 @@ public class Utilisateur {
      private List<ArticleVendu> articlesVendus = new ArrayList<>();
    
   
-     // CONSTRUCTEURS
+     @Override
+	public String toString() {
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + ", encheres=" + encheres + ", articlesVendus=" + articlesVendus
+				+ "]";
+	}
+
+
+	// CONSTRUCTEURS
      public Utilisateur() {
     	
      }

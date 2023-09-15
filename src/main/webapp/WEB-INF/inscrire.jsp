@@ -78,6 +78,7 @@
 				</div>
 			</div>
 			 <button value="Modifier" type="submit" name="modify" class="btn btn-primary">Enregistrer</button>
+			 
 			 <a href="accueil" class="btn btn-danger">Annuler</a>
 			 
 				<c:choose>

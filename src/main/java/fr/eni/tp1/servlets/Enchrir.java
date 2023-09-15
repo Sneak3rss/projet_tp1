@@ -40,7 +40,7 @@ public class Enchrir extends HttpServlet {
 
 		int credit=	(int) session.getAttribute("credit");
 		
-		if (credit > prixOffre && prixOffre > articleVendu.getMiseAPrix() ) {
+		if (credit >= prixOffre && prixOffre >= articleVendu.getMiseAPrix() ) {
 			EnchrirManager.getInstance().insertEnchirir(enchrir);
 			Utilisateur utilisateur= new Utilisateur();
 			utilisateur.setNoUtilisateur(utilisateurId);

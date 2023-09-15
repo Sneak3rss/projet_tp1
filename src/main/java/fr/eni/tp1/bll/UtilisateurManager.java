@@ -39,5 +39,9 @@ public class UtilisateurManager {
 		
 		DAOFactory.getDaoUtilisateur().updateCredit(utilasatuer);
 	}
+public void deleteUtilisater(int Id ) {
+		
+		DAOFactory.getDaoUtilisateur().delete(Id);
+	}
 	
 }
