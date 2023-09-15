@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.eni.tp1.bll.ArticleVenduManager;
@@ -55,11 +57,15 @@ public class SearchEnchere extends HttpServlet {
 							System.out.println(request.getParameter("check-enchereEnCours"));
 
 						} else {
-							System.out.println(request.getParameter("check-enchereRemporte"));
-
-							articleVendus = ArticleVenduManager.getInstance()
-									.selectAllEnchereOuvertsUtilisateurGagne(id, id);
-
+							articleVendus = ArticleVenduManager.getInstance().selectAllEnchereOuvertsUtilisateurId(id);
+							List<ArticleVendu> artics= new ArrayList<ArticleVendu>();
+							for (int i = 0; i < articleVendus.size(); i++) {
+								
+							ArticleVendu artic=	ArticleVenduManager.getInstance().selectAllEnchereOuvertsUtilisateurGagne(articleVendus.get(0).getNoarticle(),articleVendus.get(0).getNoarticle());
+							artics.add(artic);
+							}
+							articleVendus=artics;		
+							
 						}
 					} else if (choixRadio.equals("radioVente")) {
 
